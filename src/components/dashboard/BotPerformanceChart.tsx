@@ -181,3 +181,4 @@ export function BotPerformanceChart() {
     </Card>
   );
 }
+
