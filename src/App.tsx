@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Bots from "./pages/Bots";
 import History from "./pages/History";
 import NotFound from "./pages/NotFound";
+import Wallet from "./pages/Wallet";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/bots" element={<Bots />} />
-          <Route path="/wallet" element={<Index />} />
+          <Route path="/wallet" element={<Wallet />} />
           <Route path="/performance" element={<Index />} />
           <Route path="/history" element={<History />} />
           <Route path="/settings" element={<Index />} />
