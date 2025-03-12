@@ -4,7 +4,9 @@ import {
   ArrowUp,
   Bot,
   Wallet,
-  Clock
+  Clock,
+  Coins,
+  TrendingUp
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +15,7 @@ interface StatCardProps {
   title: string;
   value: string | number;
   change?: number;
-  icon: "bot" | "wallet" | "time";
+  icon: "bot" | "wallet" | "time" | "coins" | "trending-up";
   type?: "default" | "success" | "danger";
   percentage?: number;
 }
@@ -36,6 +38,10 @@ export function StatCard({
         return <Wallet className="h-5 w-5" />;
       case "time":
         return <Clock className="h-5 w-5" />;
+      case "coins":
+        return <Coins className="h-5 w-5" />;
+      case "trending-up":
+        return <TrendingUp className="h-5 w-5" />;
       default:
         return <Bot className="h-5 w-5" />;
     }

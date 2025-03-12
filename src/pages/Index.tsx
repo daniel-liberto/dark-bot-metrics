@@ -12,36 +12,36 @@ const Index = () => {
         
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <StatCard 
-            title="Bots Ativos" 
-            value="5" 
-            change={8.2} 
-            icon="bot"
-            type="default"
-            percentage={62}
-          />
-          <StatCard 
-            title="Lucro Total" 
-            value="+$2,458.30" 
-            change={12.3} 
+            title="Saldo Disponível" 
+            value="$12,340.50" 
+            change={3.8} 
             icon="wallet"
             type="success"
-            percentage={78}
+            percentage={72}
           />
           <StatCard 
-            title="Transações Hoje" 
-            value="156" 
-            change={-4.5} 
-            icon="time"
+            title="Saldo Alocado" 
+            value="$8,250.00" 
+            change={5.2} 
+            icon="coins"
             type="default"
-            percentage={48}
+            percentage={65}
           />
           <StatCard 
-            title="Win Rate" 
-            value="65.8%" 
-            change={3.2} 
+            title="Bots Ativos" 
+            value="8" 
+            change={2.0} 
             icon="bot"
             type="default"
-            percentage={66}
+            percentage={80}
+          />
+          <StatCard 
+            title="Unrealized PNL" 
+            value="+$1,235.75" 
+            change={12.3} 
+            icon="trending-up"
+            type="success"
+            percentage={75}
           />
         </div>
         
