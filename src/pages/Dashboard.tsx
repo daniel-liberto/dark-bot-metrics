@@ -24,7 +24,7 @@ const Dashboard = () => {
           type="default"
         />
         <StatCard 
-          title="Bots Ativos" 
+          title="Operações Ativas" 
           value="8" 
           change={2.0} 
           icon="bot"
