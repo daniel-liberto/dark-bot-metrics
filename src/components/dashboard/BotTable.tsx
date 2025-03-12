@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Bot, ArrowUp, ArrowDown, MoreVertical, Play, Pause } from "lucide-react";
 import { 
@@ -22,6 +23,16 @@ import {
   Line,
   LineChart,
   ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Legend,
+  ReferenceLine,
+  Area,
+  AreaChart,
+  Dot,
+  defs,
 } from "recharts";
 
 interface BotData {
@@ -95,18 +106,28 @@ const mockBots: BotData[] = [
 ];
 
 const LineChartComponent = ({ data, profit }: { data: { value: number }[], profit: number }) => {
+  const chartColor = profit >= 0 ? "#c8f906" : "#ff4e4e";
+  
   return (
     <div className="flex items-center gap-2">
       <ResponsiveContainer width={120} height={40}>
-        <LineChart data={data}>
-          <Line 
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id={`colorGradient-${profit}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={chartColor} stopOpacity={0.5}/>
+              <stop offset="95%" stopColor={chartColor} stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+          <Area 
             type="monotone" 
             dataKey="value" 
-            stroke={profit >= 0 ? "#c8f906" : "#ff4e4e"}
+            stroke={chartColor}
             strokeWidth={1.2} 
+            fillOpacity={1}
+            fill={`url(#colorGradient-${profit})`}
             dot={false}
           />
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
       <span className={cn(
         "text-xs font-medium",
