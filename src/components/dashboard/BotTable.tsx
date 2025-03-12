@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Bot, ArrowUp, ArrowDown, MoreVertical, Play, Pause } from "lucide-react";
 import { 
@@ -31,8 +30,7 @@ import {
   ReferenceLine,
   Area,
   AreaChart,
-  Dot,
-  defs,
+  Dot
 } from "recharts";
 
 interface BotData {
