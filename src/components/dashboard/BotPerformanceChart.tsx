@@ -20,6 +20,19 @@ const data = [
   { name: 'Jul', bot1: 3490, bot2: 4300, bot3: 2100 },
 ];
 
+// Format number to R$ with K suffix for thousands
+const formatYAxis = (value: number) => {
+  if (value >= 1000) {
+    return `R$ ${(value / 1000).toFixed(1)}K`;
+  }
+  return `R$ ${value}`;
+};
+
+// Format tooltip values
+const formatTooltipValue = (value: number) => {
+  return `R$ ${value.toFixed(2)}`;
+};
+
 export function BotPerformanceChart() {
   return (
     <Card className="bg-crypto-card border-crypto-card">
@@ -40,14 +53,18 @@ export function BotPerformanceChart() {
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#333" />
               <XAxis dataKey="name" tick={{ fill: '#888' }} />
-              <YAxis tick={{ fill: '#888' }} />
+              <YAxis 
+                tick={{ fill: '#888' }} 
+                tickFormatter={formatYAxis} 
+              />
               <Tooltip 
                 contentStyle={{ 
                   backgroundColor: '#222', 
                   border: '1px solid #444',
                   borderRadius: '4px',
                   color: '#fff'
-                }} 
+                }}
+                formatter={formatTooltipValue}
               />
               <defs>
                 <linearGradient id="gradientBot1" x1="0" y1="0" x2="0" y2="1">
@@ -71,6 +88,7 @@ export function BotPerformanceChart() {
                 fill="url(#gradientBot1)"
                 dot={{ r: 4, strokeWidth: 2 }} 
                 activeDot={{ r: 6, stroke: '#c8f906', strokeWidth: 2 }} 
+                name="Bot 1"
               />
               <Area 
                 type="monotone" 
@@ -80,6 +98,7 @@ export function BotPerformanceChart() {
                 fill="url(#gradientBot2)"
                 dot={{ r: 4, strokeWidth: 2 }} 
                 activeDot={{ r: 6, stroke: '#00ff9d', strokeWidth: 2 }} 
+                name="Bot 2"
               />
               <Area 
                 type="monotone" 
@@ -89,6 +108,7 @@ export function BotPerformanceChart() {
                 fill="url(#gradientBot3)"
                 dot={{ r: 4, strokeWidth: 2 }} 
                 activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2 }} 
+                name="Bot 3"
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -97,4 +117,3 @@ export function BotPerformanceChart() {
     </Card>
   );
 }
-
