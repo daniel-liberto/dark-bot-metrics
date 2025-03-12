@@ -1,5 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { DashboardLayout } from "./components/dashboard/DashboardLayout";
 import Bots from "./pages/Bots";
 import History from "./pages/History";
 import Wallet from "./pages/Wallet";
@@ -12,13 +13,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Bots />} />
-        <Route path="/bots" element={<Bots />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/credit-plans" element={<CreditPlans />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<DashboardLayout><Bots /></DashboardLayout>} />
+        <Route path="/bots" element={<DashboardLayout><Bots /></DashboardLayout>} />
+        <Route path="/history" element={<DashboardLayout><History /></DashboardLayout>} />
+        <Route path="/wallet" element={<DashboardLayout><Wallet /></DashboardLayout>} />
+        <Route path="/credit-plans" element={<DashboardLayout><CreditPlans /></DashboardLayout>} />
+        <Route path="/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
+        <Route path="*" element={<DashboardLayout><NotFound /></DashboardLayout>} />
       </Routes>
     </Router>
   );
