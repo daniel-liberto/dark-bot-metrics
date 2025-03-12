@@ -1,4 +1,6 @@
 
+import { useState } from "react";
+
 type SortDirection = "asc" | "desc";
 
 interface SortConfig<T extends string> {
@@ -7,7 +9,7 @@ interface SortConfig<T extends string> {
 }
 
 export function useTableSort<T extends string>(defaultKey: T) {
-  const [sortConfig, setSortConfig] = React.useState<SortConfig<T>>({
+  const [sortConfig, setSortConfig] = useState<SortConfig<T>>({
     key: defaultKey,
     direction: "desc",
   });
@@ -22,3 +24,4 @@ export function useTableSort<T extends string>(defaultKey: T) {
 
   return { sortConfig, requestSort };
 }
+
