@@ -145,7 +145,7 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
   const getSortIcon = (key: SortKey) => {
     if (sortConfig.key !== key) {
       return (
-        <div className="opacity-0 group-hover:opacity-50 ml-1 inline-flex">
+        <div className="ml-1 inline-flex text-gray-400">
           <ArrowUp className="h-3 w-3" />
         </div>
       );
@@ -243,7 +243,7 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
         <TableHeader>
           <TableRow className="border-crypto-card hover:bg-transparent">
             <TableHead 
-              className="text-gray-400 cursor-pointer group"
+              className="text-gray-400 cursor-pointer"
               onClick={() => requestSort("timestamp")}
             >
               <div className="flex items-center">
@@ -252,7 +252,7 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
               </div>
             </TableHead>
             <TableHead 
-              className="text-gray-400 cursor-pointer group"
+              className="text-gray-400 cursor-pointer"
               onClick={() => requestSort("botName")}
             >
               <div className="flex items-center">
@@ -261,7 +261,7 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
               </div>
             </TableHead>
             <TableHead 
-              className="text-gray-400 cursor-pointer group"
+              className="text-gray-400 cursor-pointer"
               onClick={() => requestSort("pair")}
             >
               <div className="flex items-center">
@@ -270,7 +270,7 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
               </div>
             </TableHead>
             <TableHead 
-              className="text-gray-400 cursor-pointer group"
+              className="text-gray-400 cursor-pointer"
               onClick={() => requestSort("action")}
             >
               <div className="flex items-center">
@@ -279,7 +279,7 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
               </div>
             </TableHead>
             <TableHead 
-              className="text-gray-400 cursor-pointer group"
+              className="text-gray-400 cursor-pointer"
               onClick={() => requestSort("status")}
             >
               <div className="flex items-center">
