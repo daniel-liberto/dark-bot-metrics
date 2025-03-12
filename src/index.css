@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -67,20 +68,20 @@
   }
   
   .logo-glow {
-    filter: drop-shadow(0 0 0px #c8f906);
-    transition: filter 0.3s ease;
+    filter: drop-shadow(0 0 0px rgba(200, 249, 6, 0.1));
+    transition: filter 0.5s ease;
   }
   
   .logo-glow:hover {
-    animation: glow-breath 2s infinite;
+    animation: glow-breath 4s infinite;
   }
 }
 
 @keyframes glow-breath {
   0%, 100% {
-    filter: drop-shadow(0 0 10px #c8f906);
+    filter: drop-shadow(0 0 5px rgba(200, 249, 6, 0.3));
   }
   50% {
-    filter: drop-shadow(0 0 20px #c8f906);
+    filter: drop-shadow(0 0 8px rgba(200, 249, 6, 0.5));
   }
 }
