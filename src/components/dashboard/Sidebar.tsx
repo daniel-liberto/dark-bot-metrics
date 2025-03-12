@@ -51,7 +51,7 @@ export function Sidebar() {
         <img 
           src="/lovable-uploads/95b69adc-6713-4820-a66e-318c6416adbc.png" 
           alt="Earn with AI" 
-          className="h-10 object-contain" 
+          className="h-10 object-contain logo-glow" 
         />
       </div>
       
@@ -96,3 +96,4 @@ export function Sidebar() {
     </aside>
   );
 }
+

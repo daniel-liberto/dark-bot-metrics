@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -66,5 +65,22 @@
   .text-gradient-subtle {
     @apply bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent;
   }
+  
+  .logo-glow {
+    filter: drop-shadow(0 0 0px #c8f906);
+    transition: filter 0.3s ease;
+  }
+  
+  .logo-glow:hover {
+    animation: glow-breath 2s infinite;
+  }
 }
 
+@keyframes glow-breath {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px #c8f906);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #c8f906);
+  }
+}
