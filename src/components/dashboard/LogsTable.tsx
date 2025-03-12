@@ -1,5 +1,5 @@
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { 
   Table, 
   TableBody, 
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Bot, AlertTriangle, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Bot, AlertTriangle, CheckCircle, XCircle, Clock, ArrowUp, ArrowDown } from "lucide-react";
 
 interface LogData {
   id: string;
@@ -120,7 +120,43 @@ interface LogsTableProps {
   searchQuery: string;
 }
 
+type SortKey = "timestamp" | "botName" | "pair" | "action" | "status";
+type SortDirection = "asc" | "desc";
+
 export function LogsTable({ searchQuery }: LogsTableProps) {
+  const [sortConfig, setSortConfig] = useState<{
+    key: SortKey;
+    direction: SortDirection;
+  }>({
+    key: "timestamp",
+    direction: "desc",
+  });
+  
+  const requestSort = (key: SortKey) => {
+    let direction: SortDirection = "asc";
+    
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    
+    setSortConfig({ key, direction });
+  };
+
+  const getSortIcon = (key: SortKey) => {
+    if (sortConfig.key !== key) {
+      return (
+        <div className="opacity-0 group-hover:opacity-50 ml-1 inline-flex">
+          <ArrowUp className="h-3 w-3" />
+        </div>
+      );
+    }
+    
+    return sortConfig.direction === "asc" ? (
+      <ArrowUp className="h-3 w-3 ml-1 text-crypto-green" />
+    ) : (
+      <ArrowDown className="h-3 w-3 ml-1 text-crypto-green" />
+    );
+  };
   
   const filteredLogs = useMemo(() => {
     if (!searchQuery) return mockLogs;
@@ -131,6 +167,38 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
       log.pair.toLowerCase().includes(query)
     );
   }, [searchQuery]);
+
+  const sortedLogs = useMemo(() => {
+    const sortableItems = [...filteredLogs];
+    
+    sortableItems.sort((a, b) => {
+      if (sortConfig.key === "timestamp") {
+        const dateA = new Date(a[sortConfig.key]);
+        const dateB = new Date(b[sortConfig.key]);
+        
+        if (dateA < dateB) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (dateA > dateB) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      } else {
+        const valueA = a[sortConfig.key].toLowerCase();
+        const valueB = b[sortConfig.key].toLowerCase();
+        
+        if (valueA < valueB) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      }
+    });
+    
+    return sortableItems;
+  }, [filteredLogs, sortConfig]);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -174,17 +242,57 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
       <Table>
         <TableHeader>
           <TableRow className="border-crypto-card hover:bg-transparent">
-            <TableHead className="text-gray-400">Data e Hora</TableHead>
-            <TableHead className="text-gray-400">Bot</TableHead>
-            <TableHead className="text-gray-400">Par</TableHead>
-            <TableHead className="text-gray-400">Ação</TableHead>
-            <TableHead className="text-gray-400">Status</TableHead>
+            <TableHead 
+              className="text-gray-400 cursor-pointer group"
+              onClick={() => requestSort("timestamp")}
+            >
+              <div className="flex items-center">
+                Data e Hora
+                {getSortIcon("timestamp")}
+              </div>
+            </TableHead>
+            <TableHead 
+              className="text-gray-400 cursor-pointer group"
+              onClick={() => requestSort("botName")}
+            >
+              <div className="flex items-center">
+                Bot
+                {getSortIcon("botName")}
+              </div>
+            </TableHead>
+            <TableHead 
+              className="text-gray-400 cursor-pointer group"
+              onClick={() => requestSort("pair")}
+            >
+              <div className="flex items-center">
+                Par
+                {getSortIcon("pair")}
+              </div>
+            </TableHead>
+            <TableHead 
+              className="text-gray-400 cursor-pointer group"
+              onClick={() => requestSort("action")}
+            >
+              <div className="flex items-center">
+                Ação
+                {getSortIcon("action")}
+              </div>
+            </TableHead>
+            <TableHead 
+              className="text-gray-400 cursor-pointer group"
+              onClick={() => requestSort("status")}
+            >
+              <div className="flex items-center">
+                Status
+                {getSortIcon("status")}
+              </div>
+            </TableHead>
             <TableHead className="text-gray-400">Detalhes</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredLogs.length > 0 ? (
-            filteredLogs.map((log) => (
+          {sortedLogs.length > 0 ? (
+            sortedLogs.map((log) => (
               <TableRow 
                 key={log.id} 
                 className="border-crypto-card hover:bg-crypto-card-hover"
@@ -210,9 +318,9 @@ export function LogsTable({ searchQuery }: LogsTableProps) {
         </TableBody>
       </Table>
       
-      {filteredLogs.length > 0 && (
+      {sortedLogs.length > 0 && (
         <div className="text-sm text-gray-400 mt-4">
-          Mostrando {filteredLogs.length} de {mockLogs.length} registros
+          Mostrando {sortedLogs.length} de {mockLogs.length} registros
         </div>
       )}
     </div>
