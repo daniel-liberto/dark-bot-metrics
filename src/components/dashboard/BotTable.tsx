@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Bot, ArrowUp, ArrowDown, MoreVertical, Play, Pause } from "lucide-react";
 import { 
@@ -97,17 +96,25 @@ const mockBots: BotData[] = [
 
 const LineChartComponent = ({ data, profit }: { data: { value: number }[], profit: number }) => {
   return (
-    <ResponsiveContainer width={120} height={40}>
-      <LineChart data={data}>
-        <Line 
-          type="monotone" 
-          dataKey="value" 
-          stroke={profit >= 0 ? "#c8f906" : "#ff4e4e"}
-          strokeWidth={1.5} 
-          dot={false}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="flex items-center gap-2">
+      <ResponsiveContainer width={120} height={40}>
+        <LineChart data={data}>
+          <Line 
+            type="monotone" 
+            dataKey="value" 
+            stroke={profit >= 0 ? "#c8f906" : "#ff4e4e"}
+            strokeWidth={1.2} 
+            dot={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+      <span className={cn(
+        "text-xs font-medium",
+        profit >= 0 ? "text-crypto-green" : "text-crypto-loss"
+      )}>
+        {profit > 0 ? "+" : ""}{profit}%
+      </span>
+    </div>
   );
 };
 
