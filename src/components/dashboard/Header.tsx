@@ -1,5 +1,5 @@
 
-import { Bell, ChevronDown, Eye, EyeOff } from "lucide-react";
+import { ChevronDown, Eye, EyeOff } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -13,11 +13,6 @@ export function Header() {
       <h1 className="text-2xl font-bold text-white">Dashboard</h1>
       
       <div className="flex items-center">
-        <Button variant="ghost" size="icon" className="mr-2 relative">
-          <Bell className="h-5 w-5 text-gray-400" />
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-crypto-green"></span>
-        </Button>
-        
         <div className="flex items-center gap-4 ml-4">
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-white">Saldo Alocado:</span>
@@ -39,10 +34,13 @@ export function Header() {
           </div>
           
           <div className="flex items-center gap-2">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <div className="relative">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-crypto-green border border-crypto-darker"></span>
+            </div>
             
             <div className="flex flex-col text-right">
               <div className="flex items-center gap-1.5">
