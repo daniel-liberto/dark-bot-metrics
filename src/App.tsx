@@ -1,38 +1,27 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Bots from "./pages/Bots";
 import History from "./pages/History";
-import NotFound from "./pages/NotFound";
 import Wallet from "./pages/Wallet";
 import CreditPlans from "./pages/CreditPlans";
+import Settings from "./pages/Settings";
+import NotFound from "./pages/NotFound";
+import "./App.css";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/bots" element={<Bots />} />
-          <Route path="/wallet" element={<Wallet />} />
-          <Route path="/wallet/plans" element={<CreditPlans />} />
-          <Route path="/performance" element={<Index />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/settings" element={<Index />} />
-          <Route path="/logout" element={<Index />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Bots />} />
+        <Route path="/bots" element={<Bots />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/wallet" element={<Wallet />} />
+        <Route path="/credit-plans" element={<CreditPlans />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
