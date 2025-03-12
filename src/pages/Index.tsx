@@ -2,7 +2,7 @@
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { BotPerformanceChart } from "@/components/dashboard/BotPerformanceChart";
-import { BotTable } from "@/components/dashboard/BotTable";
+import { BotOperationTable } from "@/components/dashboard/BotOperationTable";
 
 const Index = () => {
   return (
@@ -46,7 +46,10 @@ const Index = () => {
         </div>
         
         <div className="grid grid-cols-1 gap-6">
-          <BotTable />
+          <BotOperationTable 
+            type="active" 
+            title="Bots em Operação" 
+          />
         </div>
       </div>
     </DashboardLayout>
