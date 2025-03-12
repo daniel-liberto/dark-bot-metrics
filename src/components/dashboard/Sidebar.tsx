@@ -44,6 +44,7 @@ const SidebarItem = ({ icon, label, to, active, badge }: SidebarItemProps) => {
 
 export function Sidebar() {
   const location = useLocation();
+  const path = location.pathname;
   
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-crypto-card bg-crypto-darker p-4">
@@ -60,31 +61,31 @@ export function Sidebar() {
           icon={<LayoutDashboard />} 
           label="Dashboard" 
           to="/" 
-          active={location.pathname === "/"} 
+          active={path === "/"} 
         />
         <SidebarItem 
           icon={<Bot />} 
           label="Meus Bots" 
           to="/bots" 
-          active={location.pathname === "/bots"} 
+          active={path === "/bots"} 
         />
         <SidebarItem 
           icon={<Wallet />} 
           label="Carteira" 
           to="/wallet" 
-          active={location.pathname === "/wallet"} 
+          active={path === "/wallet"} 
         />
         <SidebarItem 
           icon={<LineChart />} 
           label="Performance" 
           to="/performance" 
-          active={location.pathname === "/performance"} 
+          active={path === "/performance"} 
         />
         <SidebarItem 
           icon={<History />} 
           label="Histórico" 
           to="/history" 
-          active={location.pathname === "/history"} 
+          active={path === "/history"} 
           badge={3}
         />
       </nav>
@@ -96,4 +97,3 @@ export function Sidebar() {
     </aside>
   );
 }
-
