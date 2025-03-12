@@ -1,5 +1,3 @@
-
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronLeft } from "lucide-react";
@@ -79,103 +77,101 @@ const CreditPlanCard = ({
 
 const CreditPlans = () => {
   return (
-    <DashboardLayout>
-      <div className="space-y-8">
-        <div className="flex items-center gap-3">
-          <Link 
-            to="/wallet" 
-            className="text-gray-400 hover:text-white transition-colors"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Link>
-          <div>
-            <h2 className="text-3xl font-bold text-gradient-subtle mb-2">
-              Planos de Crédito
-            </h2>
-            <p className="text-gray-400 max-w-2xl">
-              Escolha um plano que melhor se adapte às suas necessidades de trading.
-              Quanto maior o plano, maiores os bônus e retornos potenciais.
-            </p>
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="animate-fade-in [--animation-delay:200ms]">
-            <CreditPlanCard
-              title="Starter Pack"
-              subtitle="Perfeito para experimentar nossa IA"
-              price="$15"
-              bonus={null}
-              profit="$30"
-              color="bg-gray-200"
-              textColor="text-black"
-            />
-          </div>
-          
-          <div className="animate-fade-in [--animation-delay:400ms]">
-            <CreditPlanCard
-              title="Beginners Pack"
-              subtitle="Perfeito para iniciantes"
-              price="$30"
-              bonus="$5"
-              profit="$70"
-              color="bg-purple-500"
-              textColor="text-white"
-              bonusColor="text-purple-300"
-            />
-          </div>
-          
-          <div className="animate-fade-in [--animation-delay:600ms]">
-            <CreditPlanCard
-              title="Traders Pack"
-              subtitle="Mais Popular e Escolhido"
-              price="$100"
-              bonus="$50"
-              profit="$300"
-              color="bg-crypto-green"
-              textColor="text-black"
-              isPopular={true}
-            />
-          </div>
-          
-          <div className="animate-fade-in [--animation-delay:800ms]">
-            <CreditPlanCard
-              title="Black Pack"
-              subtitle="Perfeito para usuários intermediários"
-              price="$300"
-              bonus="$300"
-              profit="$1,200"
-              color="bg-black"
-              textColor="text-white"
-            />
-          </div>
-          
-          <div className="animate-fade-in [--animation-delay:1000ms]">
-            <CreditPlanCard
-              title="Pro Traders Pack"
-              subtitle="Perfeito para grandes capitais"
-              price="$500"
-              bonus="$750"
-              profit="$2,500"
-              color="bg-yellow-400"
-              textColor="text-black"
-            />
-          </div>
-          
-          <div className="animate-fade-in [--animation-delay:1200ms]">
-            <CreditPlanCard
-              title="Hodlers Pack"
-              subtitle="Perfeito para maximizar ganhos"
-              price="$1,000"
-              bonus="$2,000"
-              profit="$6,000"
-              color="bg-pink-500"
-              textColor="text-white"
-            />
-          </div>
+    <div className="space-y-8">
+      <div className="flex items-center gap-3">
+        <Link 
+          to="/wallet" 
+          className="text-gray-400 hover:text-white transition-colors"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </Link>
+        <div>
+          <h2 className="text-3xl font-bold text-gradient-subtle mb-2">
+            Planos de Crédito
+          </h2>
+          <p className="text-gray-400 max-w-2xl">
+            Escolha um plano que melhor se adapte às suas necessidades de trading.
+            Quanto maior o plano, maiores os bônus e retornos potenciais.
+          </p>
         </div>
       </div>
-    </DashboardLayout>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="animate-fade-in [--animation-delay:200ms]">
+          <CreditPlanCard
+            title="Starter Pack"
+            subtitle="Perfeito para experimentar nossa IA"
+            price="$15"
+            bonus={null}
+            profit="$30"
+            color="bg-gray-200"
+            textColor="text-black"
+          />
+        </div>
+        
+        <div className="animate-fade-in [--animation-delay:400ms]">
+          <CreditPlanCard
+            title="Beginners Pack"
+            subtitle="Perfeito para iniciantes"
+            price="$30"
+            bonus="$5"
+            profit="$70"
+            color="bg-purple-500"
+            textColor="text-white"
+            bonusColor="text-purple-300"
+          />
+        </div>
+        
+        <div className="animate-fade-in [--animation-delay:600ms]">
+          <CreditPlanCard
+            title="Traders Pack"
+            subtitle="Mais Popular e Escolhido"
+            price="$100"
+            bonus="$50"
+            profit="$300"
+            color="bg-crypto-green"
+            textColor="text-black"
+            isPopular={true}
+          />
+        </div>
+        
+        <div className="animate-fade-in [--animation-delay:800ms]">
+          <CreditPlanCard
+            title="Black Pack"
+            subtitle="Perfeito para usuários intermediários"
+            price="$300"
+            bonus="$300"
+            profit="$1,200"
+            color="bg-black"
+            textColor="text-white"
+          />
+        </div>
+        
+        <div className="animate-fade-in [--animation-delay:1000ms]">
+          <CreditPlanCard
+            title="Pro Traders Pack"
+            subtitle="Perfeito para grandes capitais"
+            price="$500"
+            bonus="$750"
+            profit="$2,500"
+            color="bg-yellow-400"
+            textColor="text-black"
+          />
+        </div>
+        
+        <div className="animate-fade-in [--animation-delay:1200ms]">
+          <CreditPlanCard
+            title="Hodlers Pack"
+            subtitle="Perfeito para maximizar ganhos"
+            price="$1,000"
+            bonus="$2,000"
+            profit="$6,000"
+            color="bg-pink-500"
+            textColor="text-white"
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
