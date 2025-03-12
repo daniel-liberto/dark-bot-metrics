@@ -17,7 +17,6 @@ const Index = () => {
             change={3.8} 
             icon="wallet"
             type="success"
-            percentage={72}
           />
           <StatCard 
             title="Saldo Alocado" 
@@ -25,7 +24,6 @@ const Index = () => {
             change={5.2} 
             icon="coins"
             type="default"
-            percentage={65}
           />
           <StatCard 
             title="Bots Ativos" 
@@ -33,7 +31,6 @@ const Index = () => {
             change={2.0} 
             icon="bot"
             type="default"
-            percentage={80}
           />
           <StatCard 
             title="Unrealized PNL" 
@@ -41,7 +38,6 @@ const Index = () => {
             change={12.3} 
             icon="trending-up"
             type="success"
-            percentage={75}
           />
         </div>
         

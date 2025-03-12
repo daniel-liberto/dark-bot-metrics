@@ -17,7 +17,7 @@ interface StatCardProps {
   change?: number;
   icon: "bot" | "wallet" | "time" | "coins" | "trending-up";
   type?: "default" | "success" | "danger";
-  percentage?: number;
+  percentage?: number; // Keep for backward compatibility, but won't use it
 }
 
 export function StatCard({ 
@@ -25,8 +25,7 @@ export function StatCard({
   value, 
   change, 
   icon,
-  type = "default",
-  percentage
+  type = "default"
 }: StatCardProps) {
   const isPositive = change && change > 0;
   
@@ -62,22 +61,6 @@ export function StatCard({
               )}>
                 {value}
               </h3>
-              
-              {percentage !== undefined && (
-                <div className="flex items-center h-8 mb-0.5">
-                  <div className="w-16 bg-gray-700 rounded-full h-2">
-                    <div 
-                      className={cn(
-                        "h-2 rounded-full", 
-                        type === "success" && "bg-crypto-gain",
-                        type === "danger" && "bg-crypto-loss",
-                        type === "default" && "bg-crypto-green"
-                      )}
-                      style={{ width: `${percentage}%` }}
-                    ></div>
-                  </div>
-                </div>
-              )}
             </div>
             
             {change && (
