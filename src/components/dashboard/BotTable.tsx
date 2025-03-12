@@ -19,6 +19,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+} from "recharts";
 
 interface BotData {
   id: string;
@@ -28,7 +33,14 @@ interface BotData {
   profit: number;
   trades: number;
   winRate: number;
+  data: { value: number }[];
 }
+
+const generateChartData = () => {
+  return Array.from({ length: 20 }, () => ({
+    value: Math.random() * 100
+  }));
+};
 
 const mockBots: BotData[] = [
   { 
@@ -38,7 +50,8 @@ const mockBots: BotData[] = [
     status: "active", 
     profit: 12.3, 
     trades: 145, 
-    winRate: 68.5
+    winRate: 68.5,
+    data: generateChartData()
   },
   { 
     id: "2", 
@@ -47,7 +60,8 @@ const mockBots: BotData[] = [
     status: "active", 
     profit: 8.1, 
     trades: 98, 
-    winRate: 71.2
+    winRate: 71.2,
+    data: generateChartData()
   },
   { 
     id: "3", 
@@ -56,7 +70,8 @@ const mockBots: BotData[] = [
     status: "paused", 
     profit: -2.4, 
     trades: 67, 
-    winRate: 42.3
+    winRate: 42.3,
+    data: generateChartData()
   },
   { 
     id: "4", 
@@ -65,7 +80,8 @@ const mockBots: BotData[] = [
     status: "error", 
     profit: 0, 
     trades: 11, 
-    winRate: 0
+    winRate: 0,
+    data: generateChartData()
   },
   { 
     id: "5", 
@@ -74,9 +90,26 @@ const mockBots: BotData[] = [
     status: "active", 
     profit: 5.7, 
     trades: 72, 
-    winRate: 63.9
+    winRate: 63.9,
+    data: generateChartData()
   },
 ];
+
+const LineChartComponent = ({ data, profit }: { data: { value: number }[], profit: number }) => {
+  return (
+    <ResponsiveContainer width={120} height={40}>
+      <LineChart data={data}>
+        <Line 
+          type="monotone" 
+          dataKey="value" 
+          stroke={profit >= 0 ? "#c8f906" : "#ff4e4e"}
+          strokeWidth={1.5} 
+          dot={false}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+};
 
 export function BotTable() {
   const [bots, setBots] = useState<BotData[]>(mockBots);
@@ -98,19 +131,19 @@ export function BotTable() {
     switch (status) {
       case "active":
         return (
-          <Badge variant="outline" className="bg-crypto-green/10 text-crypto-green border-crypto-green/20 px-2">
+          <Badge variant="outline" className="bg-crypto-green/10 text-crypto-green border-crypto-green/20">
             Ativo
           </Badge>
         );
       case "paused":
         return (
-          <Badge variant="outline" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 px-2">
+          <Badge variant="outline" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">
             Pausado
           </Badge>
         );
       case "error":
         return (
-          <Badge variant="outline" className="bg-crypto-loss/10 text-crypto-loss border-crypto-loss/20 px-2">
+          <Badge variant="outline" className="bg-crypto-loss/10 text-crypto-loss border-crypto-loss/20">
             Erro
           </Badge>
         );
@@ -131,6 +164,7 @@ export function BotTable() {
               <TableHead className="text-gray-400">Bot</TableHead>
               <TableHead className="text-gray-400">Par</TableHead>
               <TableHead className="text-gray-400">Status</TableHead>
+              <TableHead className="text-gray-400">Performance</TableHead>
               <TableHead className="text-gray-400 text-right">Lucro</TableHead>
               <TableHead className="text-gray-400 text-right">Trades</TableHead>
               <TableHead className="text-gray-400 text-right">Win Rate</TableHead>
@@ -149,6 +183,9 @@ export function BotTable() {
                 </TableCell>
                 <TableCell>{bot.type}</TableCell>
                 <TableCell>{getStatusBadge(bot.status)}</TableCell>
+                <TableCell>
+                  <LineChartComponent data={bot.data} profit={bot.profit} />
+                </TableCell>
                 <TableCell className={cn(
                   "text-right font-medium",
                   bot.profit > 0 ? "text-crypto-gain" : bot.profit < 0 ? "text-crypto-loss" : "text-gray-400"
