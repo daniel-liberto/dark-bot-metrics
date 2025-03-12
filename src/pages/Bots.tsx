@@ -1,6 +1,7 @@
 
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { BotOperationTable } from "@/components/dashboard/BotOperationTable";
 
 const Bots = () => {
   return (
@@ -29,6 +30,17 @@ const Bots = () => {
             change={12.3} 
             icon="trending-up"
             type="success"
+          />
+        </div>
+
+        <div className="space-y-6">
+          <BotOperationTable 
+            type="active" 
+            title="Bots em Operação" 
+          />
+          <BotOperationTable 
+            type="finished" 
+            title="Bots Finalizados" 
           />
         </div>
       </div>
