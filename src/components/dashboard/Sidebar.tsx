@@ -9,8 +9,7 @@ import {
   History, 
   Settings, 
   LogOut, 
-  Wallet,
-  Bitcoin
+  Wallet
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -48,12 +47,12 @@ export function Sidebar() {
   
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-crypto-card bg-crypto-darker p-4">
-      <div className="flex items-center gap-3 px-3 py-4">
-        <Bitcoin className="h-8 w-8 text-crypto-green" />
-        <div>
-          <h1 className="text-xl font-bold text-white">CryptoBot</h1>
-          <p className="text-xs text-crypto-muted">Trading Dashboard</p>
-        </div>
+      <div className="flex items-center justify-center px-3 py-4">
+        <img 
+          src="/lovable-uploads/95b69adc-6713-4820-a66e-318c6416adbc.png" 
+          alt="Earn with AI" 
+          className="h-10 object-contain" 
+        />
       </div>
       
       <nav className="flex-1 space-y-1 py-4">
