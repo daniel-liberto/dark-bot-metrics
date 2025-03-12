@@ -1,18 +1,13 @@
 
-import { Search, Bell, ChevronDown } from "lucide-react";
+import { Search, Bell, ChevronDown, Eye, EyeOff } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 export function Header() {
-  const today = new Date();
-  const options: Intl.DateTimeFormatOptions = { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  };
-  const formattedDate = today.toLocaleDateString('pt-BR', options);
+  const [hideValues, setHideValues] = useState(false);
+  const allocatedBalance = "R$ 8.250,00";
   
   return (
     <header className="flex h-16 items-center justify-between border-b border-crypto-card bg-crypto-darker px-6">
@@ -33,18 +28,38 @@ export function Header() {
           <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-crypto-green"></span>
         </Button>
         
-        <div className="flex items-center gap-2 ml-4">
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+        <div className="flex items-center gap-4 ml-4">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-white">Saldo Alocado:</span>
+            <span className="text-sm font-bold text-crypto-green">
+              {hideValues ? "••••••••" : allocatedBalance}
+            </span>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-8 w-8" 
+              onClick={() => setHideValues(!hideValues)}
+            >
+              {hideValues ? (
+                <EyeOff className="h-4 w-4 text-gray-400" />
+              ) : (
+                <Eye className="h-4 w-4 text-gray-400" />
+              )}
+            </Button>
+          </div>
           
-          <div className="flex flex-col text-right">
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-medium text-white">Usuário</span>
-              <ChevronDown className="h-4 w-4 text-gray-400" />
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            
+            <div className="flex flex-col text-right">
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-medium text-white">Usuário</span>
+                <ChevronDown className="h-4 w-4 text-gray-400" />
+              </div>
             </div>
-            <span className="text-xs text-gray-400">{formattedDate}</span>
           </div>
         </div>
       </div>
