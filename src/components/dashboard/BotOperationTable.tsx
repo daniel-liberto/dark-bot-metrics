@@ -1,5 +1,4 @@
-
-import { Bot, Activity, Ban } from "lucide-react";
+import { Bot, Activity, Ban, ArrowUp, ArrowDown } from "lucide-react";
 import { 
   Table, 
   TableBody, 
@@ -11,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useTableSort } from "@/hooks/useTableSort";
 
 interface BotTableProps {
   type: "active" | "finished";
@@ -82,8 +82,40 @@ const mockFinishedBots: BotData[] = [
   },
 ];
 
+type SortKey = "name" | "pair" | "profit" | "trades" | "status" | "startDate" | "endDate";
+
 export function BotOperationTable({ type, title }: BotTableProps) {
   const bots = type === "active" ? mockActiveBots : mockFinishedBots;
+  const { sortConfig, requestSort } = useTableSort<SortKey>("startDate");
+
+  const getSortIcon = (key: SortKey) => {
+    if (sortConfig.key !== key) {
+      return (
+        <div className="ml-1 inline-flex text-gray-400">
+          <ArrowUp className="h-3 w-3" />
+        </div>
+      );
+    }
+    
+    return sortConfig.direction === "asc" ? (
+      <ArrowUp className="h-3 w-3 ml-1 text-crypto-green" />
+    ) : (
+      <ArrowDown className="h-3 w-3 ml-1 text-crypto-green" />
+    );
+  };
+
+  const sortedBots = [...bots].sort((a, b) => {
+    const valueA = a[sortConfig.key];
+    const valueB = b[sortConfig.key];
+    
+    if (valueA < valueB) {
+      return sortConfig.direction === "asc" ? -1 : 1;
+    }
+    if (valueA > valueB) {
+      return sortConfig.direction === "asc" ? 1 : -1;
+    }
+    return 0;
+  });
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -132,19 +164,68 @@ export function BotOperationTable({ type, title }: BotTableProps) {
         <Table>
           <TableHeader>
             <TableRow className="border-crypto-card hover:bg-transparent">
-              <TableHead className="text-gray-400">Bot</TableHead>
-              <TableHead className="text-gray-400">Par</TableHead>
-              <TableHead className="text-gray-400">Status</TableHead>
-              <TableHead className="text-gray-400 text-right">Trades</TableHead>
-              <TableHead className="text-gray-400 text-right">Lucro</TableHead>
-              <TableHead className="text-gray-400">Data Início</TableHead>
+              <TableHead 
+                className="text-gray-400 cursor-pointer"
+                onClick={() => requestSort("name")}
+              >
+                <div className="flex items-center">
+                  Bot {getSortIcon("name")}
+                </div>
+              </TableHead>
+              <TableHead 
+                className="text-gray-400 cursor-pointer"
+                onClick={() => requestSort("pair")}
+              >
+                <div className="flex items-center">
+                  Par {getSortIcon("pair")}
+                </div>
+              </TableHead>
+              <TableHead 
+                className="text-gray-400 cursor-pointer"
+                onClick={() => requestSort("status")}
+              >
+                <div className="flex items-center">
+                  Status {getSortIcon("status")}
+                </div>
+              </TableHead>
+              <TableHead 
+                className="text-gray-400 cursor-pointer text-right"
+                onClick={() => requestSort("trades")}
+              >
+                <div className="flex items-center justify-end">
+                  Trades {getSortIcon("trades")}
+                </div>
+              </TableHead>
+              <TableHead 
+                className="text-gray-400 cursor-pointer text-right"
+                onClick={() => requestSort("profit")}
+              >
+                <div className="flex items-center justify-end">
+                  Lucro {getSortIcon("profit")}
+                </div>
+              </TableHead>
+              <TableHead 
+                className="text-gray-400 cursor-pointer"
+                onClick={() => requestSort("startDate")}
+              >
+                <div className="flex items-center">
+                  Data Início {getSortIcon("startDate")}
+                </div>
+              </TableHead>
               {type === "finished" && (
-                <TableHead className="text-gray-400">Data Fim</TableHead>
+                <TableHead 
+                  className="text-gray-400 cursor-pointer"
+                  onClick={() => requestSort("endDate")}
+                >
+                  <div className="flex items-center">
+                    Data Fim {getSortIcon("endDate")}
+                  </div>
+                </TableHead>
               )}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bots.map((bot) => (
+            {sortedBots.map((bot) => (
               <TableRow 
                 key={bot.id} 
                 className="border-crypto-card hover:bg-crypto-card-hover"
