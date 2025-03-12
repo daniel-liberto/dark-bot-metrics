@@ -9,6 +9,7 @@ import Bots from "./pages/Bots";
 import History from "./pages/History";
 import NotFound from "./pages/NotFound";
 import Wallet from "./pages/Wallet";
+import CreditPlans from "./pages/CreditPlans";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/bots" element={<Bots />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/wallet/plans" element={<CreditPlans />} />
           <Route path="/performance" element={<Index />} />
           <Route path="/history" element={<History />} />
           <Route path="/settings" element={<Index />} />

@@ -1,10 +1,12 @@
+
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { CreditCard, ArrowRight, Plus, Wallet as WalletIcon, Coins, CreditCardIcon } from "lucide-react";
+import { CreditCard, ArrowRight, Plus, Wallet as WalletIcon, Coins, CreditCardIcon, Package } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Wallet = () => {
   const [creditAmount, setCreditAmount] = useState<string>("");
@@ -72,14 +74,20 @@ const Wallet = () => {
                   </div>
                 </div>
                 
-                <div className="rounded-md bg-crypto-darker p-4">
-                  <div className="text-sm text-gray-400 mb-2">Métodos de Pagamento</div>
-                  <div className="flex items-center gap-3 p-2 rounded border border-crypto-card hover:border-crypto-green cursor-pointer">
-                    <CreditCard className="h-5 w-5 text-crypto-green" />
-                    <span className="text-white">Cartão de Crédito</span>
-                    <ArrowRight className="h-4 w-4 text-gray-400 ml-auto" />
+                <Link to="/wallet/plans" className="block">
+                  <div className="rounded-md bg-crypto-darker p-4 hover:bg-crypto-darker/80 transition-colors cursor-pointer border border-crypto-card hover:border-crypto-green">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Package className="h-5 w-5 text-crypto-green" />
+                        <div>
+                          <div className="text-white font-medium">Planos de Crédito</div>
+                          <div className="text-sm text-gray-400">Economize mais com nossos planos pré-pagos</div>
+                        </div>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-gray-400" />
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </CardContent>
           </Card>
