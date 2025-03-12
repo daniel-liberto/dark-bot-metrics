@@ -1,15 +1,14 @@
-
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { CreditCard, ArrowRight, Plus, Wallet, Coins, CreditCardIcon } from "lucide-react";
+import { CreditCard, ArrowRight, Plus, Wallet as WalletIcon, Coins, CreditCardIcon } from "lucide-react";
 
 const Wallet = () => {
   const [creditAmount, setCreditAmount] = useState<string>("");
-  
+
   const handleAddCredits = () => {
     console.log("Adding credits:", creditAmount);
     // Here would be the logic to add credits
