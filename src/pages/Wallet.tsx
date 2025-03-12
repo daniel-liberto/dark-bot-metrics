@@ -2,21 +2,12 @@
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { CreditCard, ArrowRight, Plus, Wallet as WalletIcon, Coins, CreditCardIcon, Package } from "lucide-react";
+import { ArrowRight, Plus, Package } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Wallet = () => {
-  const [creditAmount, setCreditAmount] = useState<string>("");
-
-  const handleAddCredits = () => {
-    console.log("Adding credits:", creditAmount);
-    // Here would be the logic to add credits
-    setCreditAmount("");
-  };
-
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -48,32 +39,10 @@ const Wallet = () => {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card className="bg-crypto-card border-crypto-card overflow-hidden">
             <CardHeader className="pb-2">
-              <CardTitle className="text-white text-xl">Adicionar Créditos</CardTitle>
+              <CardTitle className="text-white text-xl">Comprar Créditos</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex flex-col space-y-1.5">
-                  <label htmlFor="credits" className="text-sm text-gray-400">
-                    Quantidade de Créditos
-                  </label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="credits"
-                      placeholder="1000"
-                      value={creditAmount}
-                      onChange={(e) => setCreditAmount(e.target.value)}
-                      className="bg-crypto-darker border-crypto-darker text-white"
-                    />
-                    <Button 
-                      onClick={handleAddCredits}
-                      className="bg-crypto-green hover:bg-crypto-green/80 text-black"
-                    >
-                      <Plus className="mr-2 h-4 w-4" />
-                      Adicionar
-                    </Button>
-                  </div>
-                </div>
-                
                 <Link to="/wallet/plans" className="block">
                   <div className="rounded-md bg-crypto-darker p-4 hover:bg-crypto-darker/80 transition-colors cursor-pointer border border-crypto-card hover:border-crypto-green">
                     <div className="flex items-center justify-between">
