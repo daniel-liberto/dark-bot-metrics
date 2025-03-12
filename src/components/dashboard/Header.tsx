@@ -1,8 +1,7 @@
 
-import { Search, Bell, ChevronDown, Eye, EyeOff } from "lucide-react";
+import { Bell, ChevronDown, Eye, EyeOff } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 export function Header() {
@@ -14,15 +13,6 @@ export function Header() {
       <h1 className="text-2xl font-bold text-white">Dashboard</h1>
       
       <div className="flex items-center">
-        <div className="relative mr-4 w-64">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-          <Input
-            type="search"
-            placeholder="Buscar..."
-            className="bg-crypto-card w-full border-0 pl-9 text-sm"
-          />
-        </div>
-        
         <Button variant="ghost" size="icon" className="mr-2 relative">
           <Bell className="h-5 w-5 text-gray-400" />
           <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-crypto-green"></span>
