@@ -13,7 +13,7 @@ const CreditPlanCard = ({
   profit,
   color = "bg-gray-200",
   textColor = "text-black",
-  headerTextColor = "text-black",
+  headerTextColor = "text-white", // Changed to white for all cards
   bonusColor = "text-crypto-gain",
   isPopular = false
 }: { 
@@ -37,9 +37,9 @@ const CreditPlanCard = ({
           </div>
         </div>
       )}
-      <CardHeader className={`${headerTextColor} text-center p-4 transition-colors duration-300`}>
-        <h3 className="text-xl font-bold">{title}</h3>
-        <p className="text-sm opacity-80">{subtitle}</p>
+      <CardHeader className={`text-center p-4 transition-colors duration-300`}>
+        <h3 className="text-xl font-bold text-white">{title}</h3>
+        <p className="text-sm text-white opacity-80">{subtitle}</p>
       </CardHeader>
       <div className={`${color} ${textColor} p-6 text-center transition-colors duration-300 relative overflow-hidden group`}>
         <span className="text-4xl font-bold relative z-10">{price}</span>
@@ -109,7 +109,6 @@ const CreditPlans = () => {
               profit="$30"
               color="bg-gray-200"
               textColor="text-black"
-              headerTextColor="text-black"
             />
           </div>
           
@@ -122,7 +121,6 @@ const CreditPlans = () => {
               profit="$70"
               color="bg-purple-500"
               textColor="text-white"
-              headerTextColor="text-purple-500"
               bonusColor="text-purple-300"
             />
           </div>
@@ -136,7 +134,6 @@ const CreditPlans = () => {
               profit="$300"
               color="bg-crypto-green"
               textColor="text-black"
-              headerTextColor="text-crypto-green"
               isPopular={true}
             />
           </div>
@@ -150,7 +147,6 @@ const CreditPlans = () => {
               profit="$1,200"
               color="bg-black"
               textColor="text-white"
-              headerTextColor="text-white"
             />
           </div>
           
@@ -163,7 +159,6 @@ const CreditPlans = () => {
               profit="$2,500"
               color="bg-yellow-400"
               textColor="text-black"
-              headerTextColor="text-yellow-400"
             />
           </div>
           
@@ -176,7 +171,6 @@ const CreditPlans = () => {
               profit="$6,000"
               color="bg-pink-500"
               textColor="text-white"
-              headerTextColor="text-pink-500"
             />
           </div>
         </div>
