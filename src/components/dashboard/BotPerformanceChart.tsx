@@ -1,7 +1,7 @@
 
 import { 
-  LineChart, 
-  Line, 
+  AreaChart,
+  Area,
   XAxis, 
   YAxis, 
   CartesianGrid, 
@@ -29,7 +29,7 @@ export function BotPerformanceChart() {
       <CardContent>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart
+            <AreaChart
               data={data}
               margin={{
                 top: 5,
@@ -49,34 +49,52 @@ export function BotPerformanceChart() {
                   color: '#fff'
                 }} 
               />
-              <Line 
+              <defs>
+                <linearGradient id="gradientBot1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#c8f906" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#c8f906" stopOpacity={0}/>
+                </linearGradient>
+                <linearGradient id="gradientBot2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#00ff9d" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#00ff9d" stopOpacity={0}/>
+                </linearGradient>
+                <linearGradient id="gradientBot3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <Area 
                 type="monotone" 
                 dataKey="bot1" 
                 stroke="#c8f906" 
-                strokeWidth={2} 
+                strokeWidth={2}
+                fill="url(#gradientBot1)"
                 dot={{ r: 4, strokeWidth: 2 }} 
                 activeDot={{ r: 6, stroke: '#c8f906', strokeWidth: 2 }} 
               />
-              <Line 
+              <Area 
                 type="monotone" 
                 dataKey="bot2" 
                 stroke="#00ff9d" 
-                strokeWidth={2} 
+                strokeWidth={2}
+                fill="url(#gradientBot2)"
                 dot={{ r: 4, strokeWidth: 2 }} 
                 activeDot={{ r: 6, stroke: '#00ff9d', strokeWidth: 2 }} 
               />
-              <Line 
+              <Area 
                 type="monotone" 
                 dataKey="bot3" 
                 stroke="#3b82f6" 
-                strokeWidth={2} 
+                strokeWidth={2}
+                fill="url(#gradientBot3)"
                 dot={{ r: 4, strokeWidth: 2 }} 
                 activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2 }} 
               />
-            </LineChart>
+            </AreaChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
     </Card>
   );
 }
+
