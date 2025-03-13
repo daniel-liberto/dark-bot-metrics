@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -8,7 +9,8 @@ import {
   History, 
   Settings, 
   LogOut, 
-  Wallet
+  Wallet,
+  ShieldAlert
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -111,6 +113,13 @@ export function Sidebar({ isCollapsed = false }: SidebarProps) {
           to="/history" 
           active={path === "/history"} 
           badge={isCollapsed ? undefined : 3} 
+          isCollapsed={isCollapsed}
+        />
+        <SidebarItem 
+          icon={<ShieldAlert />} 
+          label="Admin Dashboard" 
+          to="/admin" 
+          active={path === "/admin"} 
           isCollapsed={isCollapsed}
         />
       </nav>

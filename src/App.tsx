@@ -7,7 +7,8 @@ import Wallet from "./pages/Wallet";
 import CreditPlans from "./pages/CreditPlans";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/Dashboard"; // Import the Dashboard component
+import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard"; // Import the AdminDashboard component
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/wallet/plans" element={<DashboardLayout><CreditPlans /></DashboardLayout>} />
         <Route path="/credit-plans" element={<DashboardLayout><CreditPlans /></DashboardLayout>} />
         <Route path="/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
+        <Route path="/admin" element={<DashboardLayout><AdminDashboard /></DashboardLayout>} /> {/* Add the admin dashboard route */}
         <Route path="*" element={<DashboardLayout><NotFound /></DashboardLayout>} />
       </Routes>
     </Router>
