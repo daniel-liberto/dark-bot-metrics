@@ -108,10 +108,13 @@ export function BotOperationTable({ type, title }: BotTableProps) {
     const valueA = a[sortConfig.key];
     const valueB = b[sortConfig.key];
     
-    if (valueA < valueB) {
+    const safeValueA = valueA ?? "";
+    const safeValueB = valueB ?? "";
+    
+    if (safeValueA < safeValueB) {
       return sortConfig.direction === "asc" ? -1 : 1;
     }
-    if (valueA > valueB) {
+    if (safeValueA > safeValueB) {
       return sortConfig.direction === "asc" ? 1 : -1;
     }
     return 0;

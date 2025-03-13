@@ -1,4 +1,3 @@
-
 import { ChevronDown, Eye, EyeOff } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,7 @@ import { useState } from "react";
 export function Header() {
   const [hideValues, setHideValues] = useState(false);
   const allocatedBalance = "R$ 8.250,00";
+  const userCredits = 500; // Valor de exemplo para os créditos do usuário
   
   return (
     <header className="flex h-16 items-center justify-between border-b border-crypto-card bg-crypto-darker px-6">
@@ -47,6 +47,7 @@ export function Header() {
                 <span className="text-sm font-medium text-white">Usuário</span>
                 <ChevronDown className="h-4 w-4 text-gray-400" />
               </div>
+              <span className="text-xs font-medium text-crypto-green">{hideValues ? "••••" : `${userCredits} Créditos`}</span>
             </div>
           </div>
         </div>

@@ -48,7 +48,7 @@ const Index = () => {
         <div className="grid grid-cols-1 gap-6">
           <BotOperationTable 
             type="active" 
-            title="Bots em Operação" 
+            title="Operações Ativas" 
           />
         </div>
       </div>

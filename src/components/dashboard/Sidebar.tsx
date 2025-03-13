@@ -65,7 +65,7 @@ export function Sidebar() {
         />
         <SidebarItem 
           icon={<Bot />} 
-          label="Meus Bots" 
+          label="Minhas Operações" 
           to="/bots" 
           active={path === "/bots"} 
         />
@@ -83,7 +83,7 @@ export function Sidebar() {
         />
         <SidebarItem 
           icon={<History />} 
-          label="Histórico" 
+          label="Logs do Bot" 
           to="/history" 
           active={path === "/history"} 
           badge={3}
