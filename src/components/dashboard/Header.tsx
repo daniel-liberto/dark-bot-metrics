@@ -44,7 +44,7 @@ export function Header() {
             
             <div className="flex flex-col text-right">
               <div className="flex items-center gap-1.5">
-                <span className="text-sm font-medium text-white">Usuário</span>
+                <span className="text-sm font-medium text-white">Usuário Fulano</span>
                 <ChevronDown className="h-4 w-4 text-gray-400" />
               </div>
               <span className="text-xs font-medium text-crypto-green">{hideValues ? "••••" : `${userCredits} Créditos`}</span>
