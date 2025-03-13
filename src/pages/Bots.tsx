@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 const Bots = () => {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-gradient-subtle">Minhas Operações</h2>
+      <h2 className="text-3xl font-bold text-gradient-subtle">Meus Bots</h2>
       
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <StatCard 
