@@ -32,15 +32,19 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, [sidebarOpen]);
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <div className="flex h-screen w-screen bg-crypto-darker text-white overflow-hidden">
       {/* Sidebar com animação de transição */}
       <div 
         className={`transition-all duration-300 ease-in-out ${
           sidebarOpen ? "w-64" : "w-0 lg:w-20"
-        } relative`}
+        }`}
       >
-        <Sidebar isCollapsed={!sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+        <Sidebar isCollapsed={!sidebarOpen} toggleSidebar={toggleSidebar} />
       </div>
       
       <div className="flex flex-1 flex-col overflow-hidden">
@@ -49,7 +53,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             variant="ghost"
             size="icon"
             className="h-9 w-9 text-gray-400 lg:hidden"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+            onClick={toggleSidebar}
           >
             <Menu className="h-5 w-5" />
           </Button>

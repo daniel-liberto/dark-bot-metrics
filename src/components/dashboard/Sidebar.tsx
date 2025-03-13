@@ -61,10 +61,10 @@ export function Sidebar({ isCollapsed = false, toggleSidebar }: SidebarProps) {
   
   return (
     <aside className={cn(
-      "flex h-screen flex-col border-r border-crypto-card bg-crypto-darker p-4 transition-all duration-300",
+      "flex h-screen flex-col border-r border-crypto-card bg-crypto-darker",
       isCollapsed ? "w-20" : "w-64"
     )}>
-      <div className="relative flex items-center justify-center px-3 py-4">
+      <div className="flex items-center justify-between p-4">
         {!isCollapsed ? (
           <img 
             src="/lovable-uploads/95b69adc-6713-4820-a66e-318c6416adbc.png" 
@@ -82,15 +82,18 @@ export function Sidebar({ isCollapsed = false, toggleSidebar }: SidebarProps) {
         
         <Button
           variant="ghost"
-          size="icon"
-          className="absolute -right-10 top-4 h-8 w-8 rounded-full bg-crypto-card text-gray-400 hover:bg-crypto-card hover:text-white border border-crypto-card hidden lg:flex"
+          size="sm"
+          className="hidden lg:flex h-8 w-8 p-0 rounded-full text-gray-400 hover:bg-crypto-card hover:text-white border border-crypto-card"
           onClick={toggleSidebar}
         >
-          {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          {isCollapsed ? 
+            <ChevronRight className="h-4 w-4" /> : 
+            <ChevronLeft className="h-4 w-4" />
+          }
         </Button>
       </div>
       
-      <nav className={cn("flex-1 space-y-1 py-4", isCollapsed && "items-center")}>
+      <nav className="flex-1 space-y-1 p-4">
         <SidebarItem 
           icon={<LayoutDashboard />} 
           label="Dashboard" 
@@ -129,7 +132,7 @@ export function Sidebar({ isCollapsed = false, toggleSidebar }: SidebarProps) {
         />
       </nav>
       
-      <div className={cn("border-t border-crypto-card pt-4", isCollapsed && "items-center")}>
+      <div className="border-t border-crypto-card p-4">
         <SidebarItem 
           icon={<Settings />} 
           label="Configurações" 
