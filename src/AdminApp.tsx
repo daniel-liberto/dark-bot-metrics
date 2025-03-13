@@ -1,5 +1,4 @@
 
-import React from "react";
 import AdminDashboard from "./pages/AdminDashboard";
 import "./App.css";
 
