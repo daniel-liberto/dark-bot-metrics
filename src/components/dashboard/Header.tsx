@@ -42,7 +42,7 @@ export function Header() {
               <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-crypto-green border border-crypto-darker"></span>
             </div>
             
-            <div className="flex flex-col text-right">
+            <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
                 <span className="text-sm font-medium text-white">Usuário Fulano</span>
                 <ChevronDown className="h-4 w-4 text-gray-400" />

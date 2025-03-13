@@ -27,7 +27,7 @@ const Wallet = () => {
         />
         <StatCard 
           title="Créditos Disponíveis" 
-          value="5,000" 
+          value="500" 
           icon="trending-up"
           type="success"
         />
@@ -65,9 +65,9 @@ const Wallet = () => {
           <CardContent>
             <div className="space-y-3">
               {[
-                { type: "Adição de Créditos", date: "24/06/2023", amount: "+1,000", status: "Concluído" },
-                { type: "Alocação para Bot", date: "22/06/2023", amount: "-500", status: "Concluído" },
-                { type: "Adição de Créditos", date: "15/06/2023", amount: "+2,500", status: "Concluído" }
+                { type: "Adição de Créditos", date: "24/06/2023", amount: "+100", status: "Concluído" },
+                { type: "Consumo ETH/USDT", date: "22/06/2023", amount: "-50", status: "Concluído" },
+                { type: "Adição de Créditos", date: "15/06/2023", amount: "+250", status: "Concluído" }
               ].map((transaction, index) => (
                 <div key={index} className="flex items-center justify-between p-3 rounded bg-crypto-darker">
                   <div className="flex items-center gap-3">
