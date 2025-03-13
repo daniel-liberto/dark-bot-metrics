@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -115,11 +114,8 @@ export function Sidebar({ isCollapsed = false }: SidebarProps) {
           badge={isCollapsed ? undefined : 3} 
           isCollapsed={isCollapsed}
         />
-        {/* External admin link that opens in a new tab */}
         <a
           href="/admin"
-          target="_blank"
-          rel="noopener noreferrer"
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
             "text-gray-400 hover:bg-crypto-card hover:text-gray-100"

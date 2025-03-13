@@ -1,11 +1,14 @@
 
 import AdminDashboard from "./pages/AdminDashboard";
+import { AdminLayout } from "./components/admin/AdminLayout";
 import "./App.css";
 
 function AdminApp() {
   return (
     <div className="min-h-screen bg-crypto-darker text-white">
-      <AdminDashboard />
+      <AdminLayout>
+        <AdminDashboard />
+      </AdminLayout>
     </div>
   );
 }
