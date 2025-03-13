@@ -1,4 +1,3 @@
-
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Header } from "@/components/dashboard/Header";
 import { useState, useEffect } from "react";
@@ -11,14 +10,17 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Detectar se é um dispositivo móvel com base na largura da tela
   useEffect(() => {
     const checkMobile = () => {
-      if (window.innerWidth < 1024 && sidebarOpen) {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      
+      // Em dispositivos móveis, a sidebar deve começar fechada
+      if (mobile && sidebarOpen) {
         setSidebarOpen(false);
-      } else if (window.innerWidth >= 1024 && !sidebarOpen) {
-        setSidebarOpen(true);
       }
     };
 
@@ -30,25 +32,30 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     
     // Limpar listener quando componente for desmontado
     return () => window.removeEventListener('resize', checkMobile);
-  }, [sidebarOpen]);
+  }, []);  // Removida a dependência sidebarOpen para evitar loops
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen(prevState => !prevState);
   };
 
   return (
     <div className="flex h-screen w-screen bg-crypto-darker text-white overflow-hidden">
       {/* Sidebar com animação de transição */}
       <div 
-        className={`transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "w-64" : "w-0 lg:w-20"
+        className={`fixed lg:relative z-20 transition-all duration-300 ease-in-out ${
+          sidebarOpen ? "w-64" : isMobile ? "w-0" : "w-20"
         }`}
       >
-        <Sidebar isCollapsed={!sidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className={`h-full ${!sidebarOpen && isMobile ? "transform -translate-x-full opacity-0" : "opacity-100"} transition-all duration-300`}>
+          <Sidebar isCollapsed={!sidebarOpen} />
+        </div>
       </div>
       
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Header>
+        <Header 
+          isSidebarOpen={sidebarOpen} 
+          toggleSidebar={toggleSidebar}
+        >
           <Button
             variant="ghost"
             size="icon"

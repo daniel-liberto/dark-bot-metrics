@@ -1,14 +1,15 @@
-
-import { ChevronDown, Eye, EyeOff } from "lucide-react";
+import { ChevronDown, Eye, EyeOff, ChevronLeft, ChevronRight, Menu } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 interface HeaderProps {
   children?: React.ReactNode;
+  isSidebarOpen?: boolean;
+  toggleSidebar?: () => void;
 }
 
-export function Header({ children }: HeaderProps) {
+export function Header({ children, isSidebarOpen = true, toggleSidebar }: HeaderProps) {
   const [hideValues, setHideValues] = useState(false);
   const allocatedBalance = "R$ 8.250,00";
   const userCredits = 500; // Valor de exemplo para os créditos do usuário
@@ -17,6 +18,23 @@ export function Header({ children }: HeaderProps) {
     <header className="flex h-16 items-center justify-between border-b border-crypto-card bg-crypto-darker px-6">
       <div className="flex items-center gap-2">
         {children}
+        
+        {/* Botão de toggle para dispositivos mobile já existe no children */}
+        
+        {/* Botão de toggle para desktop */}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="hidden lg:flex h-9 w-9 p-0 rounded-full text-gray-400 hover:bg-crypto-card hover:text-crypto-green border border-crypto-card"
+          onClick={() => toggleSidebar && toggleSidebar()}
+          aria-label={isSidebarOpen ? "Colapsar sidebar" : "Expandir sidebar"}
+        >
+          {isSidebarOpen ? 
+            <ChevronLeft className="h-5 w-5" /> : 
+            <ChevronRight className="h-5 w-5" />
+          }
+        </Button>
+        
         <h1 className="text-2xl font-bold text-white">Dashboard</h1>
       </div>
       

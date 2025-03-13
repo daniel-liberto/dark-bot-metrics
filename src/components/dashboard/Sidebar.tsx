@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -52,10 +51,9 @@ const SidebarItem = ({ icon, label, to, active, badge, isCollapsed }: SidebarIte
 
 interface SidebarProps {
   isCollapsed?: boolean;
-  toggleSidebar?: () => void;
 }
 
-export function Sidebar({ isCollapsed = false, toggleSidebar }: SidebarProps) {
+export function Sidebar({ isCollapsed = false }: SidebarProps) {
   const location = useLocation();
   const path = location.pathname;
   
@@ -64,7 +62,7 @@ export function Sidebar({ isCollapsed = false, toggleSidebar }: SidebarProps) {
       "flex h-screen flex-col border-r border-crypto-card bg-crypto-darker",
       isCollapsed ? "w-20" : "w-64"
     )}>
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-center p-4">
         {!isCollapsed ? (
           <img 
             src="/lovable-uploads/95b69adc-6713-4820-a66e-318c6416adbc.png" 
@@ -79,18 +77,6 @@ export function Sidebar({ isCollapsed = false, toggleSidebar }: SidebarProps) {
             style={{ objectFit: 'cover', objectPosition: 'left' }}
           />
         )}
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          className="hidden lg:flex h-8 w-8 p-0 rounded-full text-gray-400 hover:bg-crypto-card hover:text-white border border-crypto-card"
-          onClick={toggleSidebar}
-        >
-          {isCollapsed ? 
-            <ChevronRight className="h-4 w-4" /> : 
-            <ChevronLeft className="h-4 w-4" />
-          }
-        </Button>
       </div>
       
       <nav className="flex-1 space-y-1 p-4">
