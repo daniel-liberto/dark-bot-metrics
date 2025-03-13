@@ -11,12 +11,10 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
 
   // Detectar se é um dispositivo móvel com base na largura da tela
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
       if (window.innerWidth < 1024 && sidebarOpen) {
         setSidebarOpen(false);
       } else if (window.innerWidth >= 1024 && !sidebarOpen) {
