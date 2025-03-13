@@ -59,7 +59,7 @@ export function Sidebar({ isCollapsed = false }: SidebarProps) {
   
   return (
     <aside className={cn(
-      "flex h-screen flex-col border-r border-crypto-card bg-crypto-darker",
+      "flex h-full flex-col border-r border-crypto-card bg-crypto-darker shadow-xl",
       isCollapsed ? "w-20" : "w-64"
     )}>
       <div className="flex items-center justify-center p-4">

@@ -38,17 +38,37 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     setSidebarOpen(prevState => !prevState);
   };
 
+  // Certificar que em mobile, a sidebar será visível apenas quando explicitamente aberta
+  useEffect(() => {
+    if (isMobile && !sidebarOpen) {
+      document.body.style.overflow = 'auto';
+    } else if (isMobile && sidebarOpen) {
+      document.body.style.overflow = 'hidden'; // Previne scroll quando sidebar está aberta em mobile
+    }
+    
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMobile, sidebarOpen]);
+
   return (
     <div className="flex h-screen w-screen bg-crypto-darker text-white overflow-hidden">
+      {/* Overlay para mobile quando a sidebar está aberta */}
+      {sidebarOpen && isMobile && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-10 lg:hidden transition-opacity duration-300"
+          onClick={toggleSidebar}
+          aria-hidden="true"
+        />
+      )}
+      
       {/* Sidebar com animação de transição */}
       <div 
-        className={`fixed lg:relative z-20 transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "w-64" : isMobile ? "w-0" : "w-20"
+        className={`fixed lg:relative z-30 h-screen transition-all duration-300 ease-in-out ${
+          sidebarOpen ? "translate-x-0 w-64" : isMobile ? "-translate-x-full w-64" : "w-20"
         }`}
       >
-        <div className={`h-full ${!sidebarOpen && isMobile ? "transform -translate-x-full opacity-0" : "opacity-100"} transition-all duration-300`}>
-          <Sidebar isCollapsed={!sidebarOpen} />
-        </div>
+        <Sidebar isCollapsed={!sidebarOpen || (!isMobile && !sidebarOpen)} />
       </div>
       
       <div className="flex flex-1 flex-col overflow-hidden">
@@ -59,8 +79,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="h-9 w-9 text-gray-400 lg:hidden"
+            className="h-9 w-9 text-gray-400 lg:hidden flex items-center justify-center"
             onClick={toggleSidebar}
+            aria-label="Menu"
           >
             <Menu className="h-5 w-5" />
           </Button>
