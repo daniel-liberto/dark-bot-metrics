@@ -1,23 +1,18 @@
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
-  LineChart, 
-  Line, 
   XAxis, 
   YAxis, 
   CartesianGrid, 
   Tooltip, 
-  Legend, 
   ResponsiveContainer,
   BarChart,
   Bar,
   AreaChart,
   Area
 } from "recharts";
-import { AlertCircle, Check, AlertTriangle, TrendingUp, TrendingDown, Bell, Crown, Clock } from "lucide-react";
-import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AlertCircle, Check, AlertTriangle, TrendingUp, Crown, Clock } from "lucide-react";
+import { useState, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 // Dados simulados para os gráficos
@@ -141,9 +136,44 @@ const monthlyOperationsData: MonthlyOperationData[] = [
   { month: "Dez", volume: 31200 },
 ];
 
+// Definindo tipos para os períodos
+type PerformancePeriod = "daily" | "weekly" | "monthly";
+type BotStatus = "active" | "warning" | "error";
+
+// Renderizadores condicionais para diferentes status do bot
+const botStatusRenderers: Record<BotStatus, ReactNode> = {
+  active: (
+    <>
+      <div className="h-16 w-16 rounded-full bg-crypto-green/10 flex items-center justify-center mb-4">
+        <Check className="h-8 w-8 text-crypto-green" />
+      </div>
+      <h3 className="text-xl font-semibold text-crypto-green mb-2">Operando Normalmente</h3>
+      <p className="text-sm text-gray-400">Todas as funcionalidades estão ativas</p>
+    </>
+  ),
+  warning: (
+    <>
+      <div className="h-16 w-16 rounded-full bg-yellow-500/10 flex items-center justify-center mb-4">
+        <AlertTriangle className="h-8 w-8 text-yellow-500" />
+      </div>
+      <h3 className="text-xl font-semibold text-yellow-500 mb-2">Atenção Necessária</h3>
+      <p className="text-sm text-gray-400">Há alertas que precisam de verificação</p>
+    </>
+  ),
+  error: (
+    <>
+      <div className="h-16 w-16 rounded-full bg-crypto-loss/10 flex items-center justify-center mb-4">
+        <AlertCircle className="h-8 w-8 text-crypto-loss" />
+      </div>
+      <h3 className="text-xl font-semibold text-crypto-loss mb-2">Problemas Detectados</h3>
+      <p className="text-sm text-gray-400">Há problemas que requerem atenção imediata</p>
+    </>
+  ),
+};
+
 const AdminDashboard = () => {
-  const [performancePeriod, setPerformancePeriod] = useState("daily");
-  const [operationsPeriod, setOperationsPeriod] = useState("daily");
+  const [performancePeriod, setPerformancePeriod] = useState<PerformancePeriod>("daily");
+  const [operationsPeriod, setOperationsPeriod] = useState<PerformancePeriod>("daily");
   
   // Função para selecionar os dados de performance baseado no período
   const getPerformanceData = () => {
@@ -160,7 +190,7 @@ const AdminDashboard = () => {
   };
   
   // Função para selecionar os dados de operações baseado no período
-  const getOperationsData = () => {
+  const getOperationsData = (): OperationData[] => {
     switch (operationsPeriod) {
       case "daily":
         return hourlyOperationsData;
@@ -203,7 +233,7 @@ const AdminDashboard = () => {
   };
   
   // Função para obter o rótulo correto baseado no período
-  const getOperationsXAxisKey = () => {
+  const getOperationsXAxisKey = (): string => {
     switch (operationsPeriod) {
       case "daily":
         return "hour";
@@ -217,7 +247,7 @@ const AdminDashboard = () => {
   };
   
   // Função para obter o título da legenda baseado no período
-  const getOperationsPeriodLabel = () => {
+  const getOperationsPeriodLabel = (): string => {
     switch (operationsPeriod) {
       case "daily":
         return "Horário";
@@ -233,7 +263,7 @@ const AdminDashboard = () => {
   const operationsStats = getOperationsStats();
   
   // Estado do bot (ativo, com alertas, ou com erro)
-  const botStatus = "active" as "active" | "warning" | "error"; // Pode ser "active", "warning" ou "error"
+  const botStatus: BotStatus = "active";
   
   return (
     <div className="space-y-6">
@@ -409,33 +439,7 @@ const AdminDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col items-center justify-center p-6 text-center">
-              {botStatus === "active" && (
-                <>
-                  <div className="h-16 w-16 rounded-full bg-crypto-green/10 flex items-center justify-center mb-4">
-                    <Check className="h-8 w-8 text-crypto-green" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-crypto-green mb-2">Operando Normalmente</h3>
-                  <p className="text-sm text-gray-400">Todas as funcionalidades estão ativas</p>
-                </>
-              )}
-              {botStatus === "warning" && (
-                <>
-                  <div className="h-16 w-16 rounded-full bg-yellow-500/10 flex items-center justify-center mb-4">
-                    <AlertTriangle className="h-8 w-8 text-yellow-500" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-yellow-500 mb-2">Atenção Necessária</h3>
-                  <p className="text-sm text-gray-400">Há alertas que precisam de verificação</p>
-                </>
-              )}
-              {botStatus === "error" && (
-                <>
-                  <div className="h-16 w-16 rounded-full bg-crypto-loss/10 flex items-center justify-center mb-4">
-                    <AlertCircle className="h-8 w-8 text-crypto-loss" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-crypto-loss mb-2">Problemas Detectados</h3>
-                  <p className="text-sm text-gray-400">Há problemas que requerem atenção imediata</p>
-                </>
-              )}
+              {botStatusRenderers[botStatus]}
               
               <div className="w-full mt-6">
                 <div className="flex justify-between text-sm mb-1">
@@ -518,13 +522,19 @@ const AdminDashboard = () => {
                         color: '#fff',
                         borderRadius: '8px'
                       }}
-                      formatter={(value) => [`${value} operações`, 'Volume']}
-                      labelFormatter={(label) => `${getOperationsPeriodLabel()}: ${label}`}
+                      formatter={(value: number) => [`${value} operações`, 'Volume']}
+                      labelFormatter={(label: string) => `${getOperationsPeriodLabel()}: ${label}`}
                     />
+                    <defs>
+                      <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#10B981" stopOpacity={1}/>
+                        <stop offset="100%" stopColor="#073929" stopOpacity={0.8}/>
+                      </linearGradient>
+                    </defs>
                     <Bar 
                       dataKey="volume" 
                       name="Volume de Operações" 
-                      fill="#10B981" 
+                      fill="url(#barGradient)" 
                       radius={[4, 4, 0, 0]}
                     />
                   </BarChart>
