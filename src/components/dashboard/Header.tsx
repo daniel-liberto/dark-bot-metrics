@@ -1,4 +1,4 @@
-import { ChevronDown, Eye, EyeOff, ChevronLeft, ChevronRight, Menu } from "lucide-react";
+import { ChevronDown, Eye, EyeOff, ChevronLeft, ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";

@@ -8,11 +8,8 @@ import {
   History, 
   Settings, 
   LogOut, 
-  Wallet, 
-  ChevronLeft,
-  ChevronRight
+  Wallet
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface SidebarItemProps {
   icon: React.ReactNode;
