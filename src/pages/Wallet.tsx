@@ -1,8 +1,5 @@
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { ArrowRight, Plus, Package } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Wallet = () => {

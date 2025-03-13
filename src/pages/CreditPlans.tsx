@@ -11,7 +11,6 @@ const CreditPlanCard = ({
   profit,
   color = "bg-gray-200",
   textColor = "text-black",
-  headerTextColor = "text-white", // Changed to white for all cards
   bonusColor = "text-crypto-gain",
   isPopular = false
 }: { 
@@ -22,7 +21,6 @@ const CreditPlanCard = ({
   profit: string;
   color?: string;
   textColor?: string;
-  headerTextColor?: string;
   bonusColor?: string;
   isPopular?: boolean;
 }) => {

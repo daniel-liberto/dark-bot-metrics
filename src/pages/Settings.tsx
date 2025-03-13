@@ -20,6 +20,9 @@ interface BalanceSettings {
   allocatedBalance: string;
 }
 
+// Define a union type for modal settings
+type SettingsType = ApiSettings | BalanceSettings;
+
 const Settings = () => {
   const { toast } = useToast();
   
@@ -45,23 +48,27 @@ const Settings = () => {
   const openBalanceModal = () => setIsBalanceModalOpen(true);
 
   // Handle API settings update
-  const handleApiSettingsUpdate = (newSettings: ApiSettings) => {
-    setApiSettings(newSettings);
-    setIsApiModalOpen(false);
-    toast({
-      title: "Configurações atualizadas",
-      description: "Suas chaves de API foram atualizadas com sucesso.",
-    });
+  const handleApiSettingsUpdate = (newSettings: SettingsType) => {
+    if ('apiKey' in newSettings) {
+      setApiSettings(newSettings);
+      setIsApiModalOpen(false);
+      toast({
+        title: "Configurações atualizadas",
+        description: "Suas chaves de API foram atualizadas com sucesso.",
+      });
+    }
   };
 
   // Handle balance settings update
-  const handleBalanceSettingsUpdate = (newSettings: BalanceSettings) => {
-    setBalanceSettings(newSettings);
-    setIsBalanceModalOpen(false);
-    toast({
-      title: "Configurações atualizadas",
-      description: "Configurações de saldo atualizadas com sucesso.",
-    });
+  const handleBalanceSettingsUpdate = (newSettings: SettingsType) => {
+    if ('futuresBalance' in newSettings) {
+      setBalanceSettings(newSettings);
+      setIsBalanceModalOpen(false);
+      toast({
+        title: "Configurações atualizadas",
+        description: "Configurações de saldo atualizadas com sucesso.",
+      });
+    }
   };
 
   return (

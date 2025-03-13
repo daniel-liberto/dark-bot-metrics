@@ -1,9 +1,5 @@
-
 import { StatCard } from "@/components/dashboard/StatCard";
 import { BotOperationTable } from "@/components/dashboard/BotOperationTable";
-import { AvailableBotCard } from "@/components/dashboard/AvailableBotCard";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const Bots = () => {
   return (

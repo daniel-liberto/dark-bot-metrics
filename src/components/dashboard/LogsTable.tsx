@@ -1,4 +1,3 @@
-
 import { useMemo, useState } from "react";
 import { 
   Table, 
@@ -9,7 +8,6 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { Bot, AlertTriangle, CheckCircle, XCircle, Clock, ArrowUp, ArrowDown } from "lucide-react";
 
 interface LogData {
