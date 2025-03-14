@@ -15,6 +15,7 @@ function AdminApp() {
       <Route path="/admin/users/:userId" element={<AdminLayout><AdminUserDetail /></AdminLayout>} />
       <Route path="/admin/operations" element={<AdminLayout><AdminReports /></AdminLayout>} />
       <Route path="/admin/bot-settings" element={<AdminLayout><AdminSettings /></AdminLayout>} />
+      <Route path="/admin/settings" element={<AdminLayout><AdminSettings /></AdminLayout>} />
       <Route path="/admin/finance" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
       <Route path="/admin/tools" element={<AdminLayout><AdminSettings /></AdminLayout>} />
       <Route path="/admin/*" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
