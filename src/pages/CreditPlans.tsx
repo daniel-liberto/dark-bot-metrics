@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import { BorderBeam } from "@/components/ui/border-beam";
 
 const CreditPlanCard = ({ 
   title, 
@@ -35,20 +34,8 @@ const CreditPlanCard = ({
 }) => {
   if (hasBorderBeam) {
     return (
-      <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-green-900/10 transition-shadow duration-300">
-        <div className="absolute inset-0 border border-gray-700/70 rounded-xl z-0"></div>
-        <Card className="relative bg-crypto-darker overflow-hidden h-full rounded-xl m-[1px] border-0">
-          <BorderBeam
-            size={310}
-            duration={10}
-            borderWidth={1.5}
-            colorFrom="#84cc16"
-            colorTo="#10b981"
-            delay={0}
-            anchor={90}
-            className="z-10"
-          />
-          
+      <div className="relative p-[2px] rounded-xl bg-gradient-to-br from-[#84cc16] via-[#10b981] to-[#84cc16] shadow-lg hover:shadow-green-900/20">
+        <Card className="relative border-transparent bg-crypto-darker overflow-hidden h-full rounded-xl">
           {isPopular && (
             <div className="absolute top-0 right-0 z-20">
               <div className="bg-crypto-green text-black text-xs px-3 py-1 rounded-bl-md font-semibold">
@@ -223,7 +210,7 @@ const CreditPlans = () => {
             price="R$ 519,00"
             bonus="+50 bônus em créditos"
             profit="R$ 1.557,00"
-            color="text-crypto-green"
+            color="bg-crypto-green"
             textColor="text-black"
             isPopular={true}
             creditsBase={100}

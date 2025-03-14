@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -8,7 +9,8 @@ import {
   LineChart, 
   Settings, 
   LogOut, 
-  ShieldAlert
+  ShieldAlert,
+  Home
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -69,6 +71,10 @@ export function AdminSidebar({ isCollapsed = false }: AdminSidebarProps) {
   const location = useLocation();
   const path = location.pathname;
   
+  const goToMainApp = () => {
+    window.location.href = "/";
+  };
+  
   return (
     <aside className={cn(
       "flex h-full flex-col border-r border-crypto-card bg-crypto-darker shadow-xl",
@@ -114,18 +120,12 @@ export function AdminSidebar({ isCollapsed = false }: AdminSidebarProps) {
           active={path === "/stats"}
           isCollapsed={isCollapsed}
         />
-        <a
-          href="/"
-          className={cn(
-            "flex w-full items-center justify-start gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            "text-gray-400 hover:bg-crypto-card hover:text-gray-100"
-          )}
-        >
-          <div className="h-5 w-5 flex-shrink-0"><LayoutDashboard /></div>
-          {!isCollapsed && (
-            <span className="truncate">Painel do Cliente</span>
-          )}
-        </a>
+        <AdminSidebarItem 
+          icon={<Home />} 
+          label="Voltar ao App" 
+          onClick={goToMainApp}
+          isCollapsed={isCollapsed}
+        />
       </nav>
       
       <div className="border-t border-crypto-card p-4">

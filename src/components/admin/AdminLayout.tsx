@@ -4,11 +4,11 @@ import {
   Users, 
   Settings, 
   LogOut,
+  Home,
   Activity,
   Bot,
   DollarSign,
-  Wrench,
-  ShieldAlert
+  Wrench
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -91,32 +91,20 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             to="/admin/tools" 
             active={path === "/admin/tools"} 
           />
+          
+          <div className="pt-6 mt-6 border-t border-crypto-card">
+            <AdminSidebarItem 
+              icon={<Home />} 
+              label="Painel do Cliente" 
+              to="/" 
+            />
+            <AdminSidebarItem 
+              icon={<LogOut />} 
+              label="Sair" 
+              to="/logout" 
+            />
+          </div>
         </nav>
-        
-        <div className="mt-auto border-t border-crypto-card p-4">
-          <a
-            href="/"
-            className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors mb-1",
-              "text-gray-400 hover:bg-crypto-card hover:text-gray-100",
-              "border border-crypto-green"
-            )}
-          >
-            <div className="h-5 w-5 flex-shrink-0"><ShieldAlert /></div>
-            <span className="truncate">Painel do Cliente</span>
-          </a>
-          <AdminSidebarItem 
-            icon={<Settings />} 
-            label="Configurações" 
-            to="/admin/settings" 
-            active={path === "/admin/settings"} 
-          />
-          <AdminSidebarItem 
-            icon={<LogOut />} 
-            label="Sair" 
-            to="/logout" 
-          />
-        </div>
       </aside>
       
       {/* Main Content Area */}
