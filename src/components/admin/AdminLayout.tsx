@@ -4,8 +4,11 @@ import {
   Users, 
   Settings, 
   LogOut,
-  BarChart,
-  Home
+  Home,
+  Activity,
+  Bot,
+  DollarSign,
+  Wrench
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -45,7 +48,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     <div className="flex h-screen w-screen bg-crypto-darker text-white overflow-hidden">
       {/* Admin Sidebar */}
       <aside className="flex h-full w-64 flex-col border-r border-crypto-card bg-crypto-darker shadow-xl">
-        <div className="flex items-center justify-between p-4 border-b border-crypto-card">
+        <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
             <span className="text-lg font-bold text-white">Admin Panel</span>
           </div>
@@ -65,22 +68,34 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             active={path === "/admin/users" || path.startsWith("/admin/users/")} 
           />
           <AdminSidebarItem 
-            icon={<BarChart />} 
-            label="Relatórios" 
-            to="/admin/reports" 
-            active={path === "/admin/reports"} 
+            icon={<Activity />} 
+            label="Monitorar Operações" 
+            to="/admin/operations" 
+            active={path === "/admin/operations"} 
           />
           <AdminSidebarItem 
-            icon={<Settings />} 
-            label="Configurações" 
-            to="/admin/settings" 
-            active={path === "/admin/settings"} 
+            icon={<Bot />} 
+            label="Configurações do Bot" 
+            to="/admin/bot-settings" 
+            active={path === "/admin/bot-settings"} 
+          />
+          <AdminSidebarItem 
+            icon={<DollarSign />} 
+            label="Financeiro e Faturamento" 
+            to="/admin/finance" 
+            active={path === "/admin/finance"} 
+          />
+          <AdminSidebarItem 
+            icon={<Wrench />} 
+            label="Ferramentas de Administração" 
+            to="/admin/tools" 
+            active={path === "/admin/tools"} 
           />
           
           <div className="pt-6 mt-6 border-t border-crypto-card">
             <AdminSidebarItem 
               icon={<Home />} 
-              label="Voltar ao App" 
+              label="Painel do Cliente" 
               to="/" 
             />
             <AdminSidebarItem 

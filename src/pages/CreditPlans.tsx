@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -12,7 +12,11 @@ const CreditPlanCard = ({
   color = "bg-gray-200",
   textColor = "text-black",
   bonusColor = "text-crypto-gain",
-  isPopular = false
+  isPopular = false,
+  creditsBase = 15,
+  creditsBonus = 0,
+  borderStyle = "",
+  hasBorderBeam = false
 }: { 
   title: string;
   subtitle: string;
@@ -23,49 +27,122 @@ const CreditPlanCard = ({
   textColor?: string;
   bonusColor?: string;
   isPopular?: boolean;
+  creditsBase?: number;
+  creditsBonus?: number;
+  borderStyle?: string;
+  hasBorderBeam?: boolean;
 }) => {
+  if (hasBorderBeam) {
+    return (
+      <div className="relative p-[2px] rounded-xl bg-gradient-to-br from-[#84cc16] via-[#10b981] to-[#84cc16] shadow-lg hover:shadow-green-900/20">
+        <Card className="relative border-transparent bg-crypto-darker overflow-hidden h-full rounded-xl">
+          {isPopular && (
+            <div className="absolute top-0 right-0 z-20">
+              <div className="bg-crypto-green text-black text-xs px-3 py-1 rounded-bl-md font-semibold">
+                Mais Popular
+              </div>
+            </div>
+          )}
+          
+          <CardHeader className="pb-2 relative z-10">
+            <CardTitle className="text-white">{title}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 relative z-10">
+            <div>
+              <p className="text-sm text-gray-400 mb-1">{subtitle}</p>
+              
+              {bonus ? (
+                <p className={`${bonusColor} text-xs`}>{bonus}</p>
+              ) : (
+                <p className="text-xs text-gray-500">Sem bônus em créditos</p>
+              )}
+            </div>
+            
+            <div className="bg-crypto-darker border border-gray-700 rounded-md p-3">
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-gray-400 text-sm">Investimento:</span>
+                <span className="text-white text-sm font-medium">{price}</span>
+              </div>
+              
+              <div className="flex justify-between items-center border-t border-gray-700 pt-3 mb-2">
+                <span className="text-gray-300 font-medium">Créditos:</span>
+                <span className="text-white text-lg font-bold">
+                  {creditsBase} 
+                  {creditsBonus > 0 && (
+                    <span className="text-crypto-green"> + {creditsBonus}</span>
+                  )}
+                </span>
+              </div>
+              
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-gray-300 font-medium">Lucro projetado:</span>
+                <span className="text-crypto-green text-lg font-bold">{profit}</span>
+              </div>
+            </div>
+            
+            <div className="bg-crypto-green/20 px-2 py-1 rounded text-center text-xs text-crypto-green font-medium">
+              {creditsBase + creditsBonus} créditos totais
+            </div>
+            
+            <Button className="w-full mt-2 bg-crypto-green hover:bg-crypto-green/80 text-black transition-all duration-300 hover:shadow-lg hover:shadow-crypto-green/20 transform hover:-translate-y-0.5 font-bold text-base">
+              Comprar Agora
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
-    <Card className="overflow-hidden border border-crypto-card hover:border-crypto-green transition-all duration-300 transform hover:scale-[1.02] flex flex-col h-full relative">
+    <Card className={`border border-gray-700/50 hover:border-crypto-green/70 bg-crypto-darker transition-all duration-300 relative overflow-hidden h-full ${borderStyle}`}>
       {isPopular && (
         <div className="absolute top-0 right-0">
-          <div className="bg-crypto-green text-black text-xs px-3 py-1 rounded-bl-md font-semibold animate-pulse">
+          <div className="bg-crypto-green text-black text-xs px-3 py-1 rounded-bl-md font-semibold">
             Mais Popular
           </div>
         </div>
       )}
-      <CardHeader className={`text-center p-4 transition-colors duration-300`}>
-        <h3 className="text-xl font-bold text-white">{title}</h3>
-        <p className="text-sm text-white opacity-80">{subtitle}</p>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-white">{title}</CardTitle>
       </CardHeader>
-      <div className={`${color} ${textColor} p-6 text-center transition-colors duration-300 relative overflow-hidden group`}>
-        <span className="text-4xl font-bold relative z-10">{price}</span>
-        <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </div>
-      <CardContent className="flex-1 flex flex-col justify-between p-6 bg-crypto-card">
-        <div className="space-y-4">
-          {bonus ? (
-            <div className="transform transition-all duration-300 hover:scale-105">
-              <p className={`text-center ${bonusColor} font-medium`}>
-                Ganhe {bonus} bônus em créditos
-              </p>
-            </div>
-          ) : (
-            <p className="text-center text-gray-400">
-              Sem bônus em créditos
-            </p>
-          )}
+      <CardContent className="space-y-4">
+        <div>
+          <p className="text-sm text-gray-400 mb-1">{subtitle}</p>
           
-          <div className="flex items-center gap-2 text-white">
-            <div className="rounded-full bg-crypto-green/20 p-1">
-              <Check className="h-4 w-4 text-crypto-green" />
-            </div>
-            <span>
-              Você receberá <span className="font-semibold text-crypto-green">{profit}</span> de lucro
+          {bonus ? (
+            <p className={`${bonusColor} text-xs`}>{bonus}</p>
+          ) : (
+            <p className="text-xs text-gray-500">Sem bônus em créditos</p>
+          )}
+        </div>
+        
+        <div className="bg-crypto-darker border border-gray-700 rounded-md p-3">
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-gray-400 text-sm">Investimento:</span>
+            <span className="text-white text-sm font-medium">{price}</span>
+          </div>
+          
+          <div className="flex justify-between items-center border-t border-gray-700 pt-3 mb-2">
+            <span className="text-gray-300 font-medium">Créditos:</span>
+            <span className="text-white text-lg font-bold">
+              {creditsBase} 
+              {creditsBonus > 0 && (
+                <span className="text-crypto-green"> + {creditsBonus}</span>
+              )}
             </span>
+          </div>
+          
+          <div className="flex justify-between items-center mb-1">
+            <span className="text-gray-300 font-medium">Lucro projetado:</span>
+            <span className="text-crypto-green text-lg font-bold">{profit}</span>
           </div>
         </div>
         
-        <Button className="mt-6 w-full bg-crypto-green hover:bg-crypto-green/80 text-black transition-all duration-300 hover:shadow-lg hover:shadow-crypto-green/20 transform hover:-translate-y-0.5">
+        <div className="bg-crypto-green/20 px-2 py-1 rounded text-center text-xs text-crypto-green font-medium">
+          {creditsBase + creditsBonus} créditos totais
+        </div>
+        
+        <Button className="w-full mt-2 bg-crypto-green hover:bg-crypto-green/80 text-black transition-all duration-300 hover:shadow-lg hover:shadow-crypto-green/20 transform hover:-translate-y-0.5 font-bold text-base">
           Comprar Agora
         </Button>
       </CardContent>
@@ -99,11 +176,14 @@ const CreditPlans = () => {
           <CreditPlanCard
             title="Starter Pack"
             subtitle="Perfeito para experimentar nossa IA"
-            price="$15"
+            price="R$ 77,85"
             bonus={null}
-            profit="$30"
+            profit="R$ 155,70"
             color="bg-gray-200"
             textColor="text-black"
+            creditsBase={15}
+            creditsBonus={0}
+            borderStyle="border border-indigo-500/30 hover:border-indigo-500/60"
           />
         </div>
         
@@ -111,12 +191,15 @@ const CreditPlans = () => {
           <CreditPlanCard
             title="Beginners Pack"
             subtitle="Perfeito para iniciantes"
-            price="$30"
-            bonus="$5"
-            profit="$70"
+            price="R$ 155,70"
+            bonus="+5 bônus em créditos"
+            profit="R$ 363,30"
             color="bg-purple-500"
             textColor="text-white"
             bonusColor="text-purple-300"
+            creditsBase={30}
+            creditsBonus={5}
+            borderStyle="border border-purple-500/30 hover:border-purple-500/60"
           />
         </div>
         
@@ -124,12 +207,15 @@ const CreditPlans = () => {
           <CreditPlanCard
             title="Traders Pack"
             subtitle="Mais Popular e Escolhido"
-            price="$100"
-            bonus="$50"
-            profit="$300"
+            price="R$ 519,00"
+            bonus="+50 bônus em créditos"
+            profit="R$ 1.557,00"
             color="bg-crypto-green"
             textColor="text-black"
             isPopular={true}
+            creditsBase={100}
+            creditsBonus={50}
+            hasBorderBeam={true}
           />
         </div>
         
@@ -137,11 +223,14 @@ const CreditPlans = () => {
           <CreditPlanCard
             title="Black Pack"
             subtitle="Perfeito para usuários intermediários"
-            price="$300"
-            bonus="$300"
-            profit="$1,200"
+            price="R$ 1.557,00"
+            bonus="+300 bônus em créditos"
+            profit="R$ 6.228,00"
             color="bg-black"
             textColor="text-white"
+            creditsBase={300}
+            creditsBonus={300}
+            borderStyle="border border-purple-800/30 hover:border-purple-800/60"
           />
         </div>
         
@@ -149,11 +238,14 @@ const CreditPlans = () => {
           <CreditPlanCard
             title="Pro Traders Pack"
             subtitle="Perfeito para grandes capitais"
-            price="$500"
-            bonus="$750"
-            profit="$2,500"
+            price="R$ 2.595,00"
+            bonus="+750 bônus em créditos"
+            profit="R$ 12.975,00"
             color="bg-yellow-400"
             textColor="text-black"
+            creditsBase={500}
+            creditsBonus={750}
+            borderStyle="border border-orange-500/30 hover:border-orange-500/60"
           />
         </div>
         
@@ -161,11 +253,14 @@ const CreditPlans = () => {
           <CreditPlanCard
             title="Hodlers Pack"
             subtitle="Perfeito para maximizar ganhos"
-            price="$1,000"
-            bonus="$2,000"
-            profit="$6,000"
+            price="R$ 5.190,00"
+            bonus="+2.000 bônus em créditos"
+            profit="R$ 31.140,00"
             color="bg-pink-500"
             textColor="text-white"
+            creditsBase={1000}
+            creditsBonus={2000}
+            borderStyle="border border-pink-500/30 hover:border-pink-500/60"
           />
         </div>
       </div>
