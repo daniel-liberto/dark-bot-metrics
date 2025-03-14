@@ -2,17 +2,18 @@ import { Routes, Route } from "react-router-dom";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminUsers from "./pages/AdminUsers";
 import AdminUserDetail from "./pages/AdminUserDetail";
+import { AdminLayout } from "./components/admin/AdminLayout";
 import "./App.css";
 
 function AdminApp() {
   return (
-    <div className="min-h-screen bg-crypto-darker text-white">
-      <Routes>
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/users/:userId" element={<AdminUserDetail />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
+      <Route path="/admin/users" element={<AdminLayout><AdminUsers /></AdminLayout>} />
+      <Route path="/admin/users/:userId" element={<AdminLayout><AdminUserDetail /></AdminLayout>} />
+      {/* Adicione mais rotas administrativas conforme necessário */}
+      <Route path="/admin/*" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
+    </Routes>
   );
 }
 

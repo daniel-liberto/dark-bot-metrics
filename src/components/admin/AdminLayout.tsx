@@ -1,95 +1,112 @@
+import { Link, useLocation } from "react-router-dom";
+import { 
+  LayoutDashboard, 
+  Users, 
+  Settings, 
+  LogOut,
+  BarChart,
+  Home
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-import { useState, useEffect } from "react";
-import { AdminSidebar } from "./AdminSidebar";
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+interface AdminSidebarItemProps {
+  icon: React.ReactNode;
+  label: string;
+  to: string;
+  active?: boolean;
+}
+
+const AdminSidebarItem = ({ icon, label, to, active }: AdminSidebarItemProps) => {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors mb-1",
+        active 
+          ? "bg-crypto-card text-crypto-green" 
+          : "text-gray-400 hover:bg-crypto-card hover:text-gray-100"
+      )}
+    >
+      <div className="h-5 w-5 flex-shrink-0">{icon}</div>
+      <span className="truncate">{label}</span>
+    </Link>
+  );
+};
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 export function AdminLayout({ children }: AdminLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detectar se é um dispositivo móvel com base na largura da tela
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      
-      // Em dispositivos móveis, a sidebar deve começar fechada
-      if (mobile && sidebarOpen) {
-        setSidebarOpen(false);
-      }
-    };
-
-    // Verificar no carregamento inicial
-    checkMobile();
-    
-    // Adicionar listener para redimensionamento
-    window.addEventListener('resize', checkMobile);
-    
-    // Limpar listener quando componente for desmontado
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(prevState => !prevState);
-  };
-
-  // Certificar que em mobile, a sidebar será visível apenas quando explicitamente aberta
-  useEffect(() => {
-    if (isMobile && !sidebarOpen) {
-      document.body.style.overflow = 'auto';
-    } else if (isMobile && sidebarOpen) {
-      document.body.style.overflow = 'hidden'; // Previne scroll quando sidebar está aberta em mobile
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isMobile, sidebarOpen]);
-
+  const location = useLocation();
+  const path = location.pathname;
+  
   return (
     <div className="flex h-screen w-screen bg-crypto-darker text-white overflow-hidden">
-      {/* Overlay para mobile quando a sidebar está aberta */}
-      {sidebarOpen && isMobile && (
-        <div 
-          className="fixed inset-0 bg-black/60 z-10 lg:hidden transition-opacity duration-300"
-          onClick={toggleSidebar}
-          aria-hidden="true"
-        />
-      )}
+      {/* Admin Sidebar */}
+      <aside className="flex h-full w-64 flex-col border-r border-crypto-card bg-crypto-darker shadow-xl">
+        <div className="flex items-center justify-between p-4 border-b border-crypto-card">
+          <div className="flex items-center gap-2">
+            <img 
+              src="/lovable-uploads/95b69adc-6713-4820-a66e-318c6416adbc.png" 
+              alt="Logo" 
+              className="h-8 object-contain logo-glow" 
+            />
+            <span className="text-lg font-bold text-white">Admin Panel</span>
+          </div>
+        </div>
+        
+        <nav className="flex-1 space-y-1 p-4">
+          <AdminSidebarItem 
+            icon={<LayoutDashboard />} 
+            label="Dashboard" 
+            to="/admin" 
+            active={path === "/admin"} 
+          />
+          <AdminSidebarItem 
+            icon={<Users />} 
+            label="Usuários" 
+            to="/admin/users" 
+            active={path === "/admin/users" || path.startsWith("/admin/users/")} 
+          />
+          <AdminSidebarItem 
+            icon={<BarChart />} 
+            label="Relatórios" 
+            to="/admin/reports" 
+            active={path === "/admin/reports"} 
+          />
+          <AdminSidebarItem 
+            icon={<Settings />} 
+            label="Configurações" 
+            to="/admin/settings" 
+            active={path === "/admin/settings"} 
+          />
+          
+          <div className="pt-6 mt-6 border-t border-crypto-card">
+            <AdminSidebarItem 
+              icon={<Home />} 
+              label="Voltar ao App" 
+              to="/" 
+            />
+            <AdminSidebarItem 
+              icon={<LogOut />} 
+              label="Sair" 
+              to="/logout" 
+            />
+          </div>
+        </nav>
+      </aside>
       
-      {/* Sidebar com animação de transição */}
-      <div 
-        className={`fixed lg:relative z-30 h-screen transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "translate-x-0 w-64" : isMobile ? "-translate-x-full w-64" : "w-20"
-        }`}
-      >
-        <AdminSidebar isCollapsed={!sidebarOpen && !isMobile} />
-      </div>
-      
+      {/* Main Content Area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <header className="flex h-16 items-center justify-between border-b border-crypto-card bg-crypto-darker px-6">
-          <div className="flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9 text-gray-400 lg:hidden flex items-center justify-center mr-4"
-              onClick={toggleSidebar}
-              aria-label="Menu"
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
-            <h1 className="text-xl font-bold text-white">Painel de Administração</h1>
-          </div>
-          <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-white">Painel Administrativo</h1>
+          
+          <div className="flex items-center gap-4">
             <span className="text-sm text-gray-400">Admin</span>
-            <div className="h-10 w-10 rounded-full bg-crypto-green" />
           </div>
         </header>
+        
         <main className="flex-1 overflow-auto p-6">
           {children}
         </main>
