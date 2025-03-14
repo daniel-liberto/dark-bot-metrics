@@ -8,15 +8,24 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     strictPort: true,
-    historyApiFallback: {
-      rewrites: [
-        { from: /^\/admin.*/, to: '/index.html' },
-        { from: /./, to: '/index.html' }
-      ],
-    },
+    proxy: undefined,
+    middlewareMode: false
   },
   plugins: [
     react(),
+    {
+      name: 'spa-fallback',
+      configureServer(server) {
+        return () => {
+          server.middlewares.use((req, res, next) => {
+            if (req.url.startsWith('/admin') || req.url === '/admin') {
+              req.url = '/index.html';
+            }
+            next();
+          });
+        };
+      }
+    }
   ],
   resolve: {
     alias: {
