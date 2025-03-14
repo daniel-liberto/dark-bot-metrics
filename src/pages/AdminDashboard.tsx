@@ -13,7 +13,6 @@ import {
 } from "recharts";
 import { AlertCircle, Check, AlertTriangle, TrendingUp, Crown, Clock } from "lucide-react";
 import { useState, ReactNode } from "react";
-import { cn } from "@/lib/utils";
 
 // Dados simulados para os gráficos
 const dailyPerformanceData = [
