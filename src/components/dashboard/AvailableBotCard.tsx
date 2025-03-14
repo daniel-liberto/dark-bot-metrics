@@ -1,5 +1,5 @@
 
-import { Bot, Cpu, Microchip, ArrowRight } from "lucide-react";
+import { Bot, Cpu, CircuitBoard, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -11,7 +11,7 @@ interface AvailableBotCardProps {
   pair: string;
   startDate: string;
   pnl: number;
-  imageType: "bot" | "cpu" | "microchip";
+  imageType: "bot" | "cpu" | "circuitBoard";
 }
 
 export function AvailableBotCard({ name, pair, startDate, pnl, imageType }: AvailableBotCardProps) {
@@ -30,8 +30,8 @@ export function AvailableBotCard({ name, pair, startDate, pnl, imageType }: Avai
         return <Bot className="h-10 w-10" />;
       case "cpu":
         return <Cpu className="h-10 w-10" />;
-      case "microchip":
-        return <Microchip className="h-10 w-10" />;
+      case "circuitBoard":
+        return <CircuitBoard className="h-10 w-10" />;
       default:
         return <Bot className="h-10 w-10" />;
     }
