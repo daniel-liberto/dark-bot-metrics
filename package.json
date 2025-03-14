@@ -2,8 +2,10 @@
   "name": "dark-bot-metrics",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:alt": "vite --config vite.config.js",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint ."
