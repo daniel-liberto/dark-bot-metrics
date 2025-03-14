@@ -2,8 +2,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-// Comentando a importação direta que está causando problemas
-// import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -13,8 +11,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    // Removendo a referência direta ao componentTagger()
-    // mode === 'development' && componentTagger(),
+    // The tagger will be loaded dynamically when needed
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -23,7 +20,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     rollupOptions: {
-      // Make sure react-router-dom is not externalized
+      // Ensure react-router-dom is properly bundled
       external: [],
     },
   },
