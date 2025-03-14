@@ -105,7 +105,7 @@ export default {
   			},
         'border-beam': {
           '0%': {
-            offsetDistance: '0%',
+            'offset-distance': '0%',
             opacity: '0',
           },
           '10%': {
@@ -115,7 +115,7 @@ export default {
             opacity: '1',
           },
           '100%': {
-            offsetDistance: '100%',
+            'offset-distance': '100%',
             opacity: '0',
           },
         }

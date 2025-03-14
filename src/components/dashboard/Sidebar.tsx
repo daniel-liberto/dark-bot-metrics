@@ -114,21 +114,22 @@ export function Sidebar({ isCollapsed = false }: SidebarProps) {
           badge={isCollapsed ? undefined : 3} 
           isCollapsed={isCollapsed}
         />
+      </nav>
+      
+      <div className="border-t border-crypto-card p-4">
         <a
           href="/admin"
           className={cn(
-            "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            "text-gray-400 hover:bg-crypto-card hover:text-gray-100"
+            "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors mb-2",
+            "text-gray-400 hover:bg-crypto-card hover:text-gray-100",
+            "border border-crypto-green"
           )}
         >
           <div className="h-5 w-5 flex-shrink-0"><ShieldAlert /></div>
           {!isCollapsed && (
-            <span className="truncate">Admin Dashboard</span>
+            <span className="truncate">Painel do Admin</span>
           )}
         </a>
-      </nav>
-      
-      <div className="border-t border-crypto-card p-4">
         <SidebarItem 
           icon={<Settings />} 
           label="Configurações" 
