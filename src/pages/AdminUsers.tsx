@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTableSort } from "@/hooks/useTableSort";
 import { 
@@ -29,7 +30,6 @@ import {
   PaginationPrevious
 } from "@/components/ui/pagination";
 import { useNavigate } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Mock data for demonstration
 const mockUsers = [

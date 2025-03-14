@@ -69,10 +69,6 @@ const AdminUserDetail = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
-  const [showAddCreditsDialog, setShowAddCreditsDialog] = useState(false);
-  const [showSendMessageDialog, setShowSendMessageDialog] = useState(false);
-  const [showEditUserDialog, setShowEditUserDialog] = useState(false);
-  const [isFrozen, setIsFrozen] = useState(false);
   
   const user = mockUserDetail;
   
