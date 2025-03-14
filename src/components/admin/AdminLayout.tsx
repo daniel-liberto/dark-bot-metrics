@@ -47,6 +47,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       <aside className="flex h-full w-64 flex-col border-r border-crypto-card bg-crypto-darker shadow-xl">
         <div className="flex items-center justify-between p-4 border-b border-crypto-card">
           <div className="flex items-center gap-2">
+            <img 
+              src="/lovable-uploads/95b69adc-6713-4820-a66e-318c6416adbc.png" 
+              alt="Logo" 
+              className="h-8 object-contain logo-glow" 
+            />
             <span className="text-lg font-bold text-white">Admin Panel</span>
           </div>
         </div>
@@ -54,7 +59,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         <nav className="flex-1 space-y-1 p-4">
           <AdminSidebarItem 
             icon={<LayoutDashboard />} 
-            label="Visão Geral" 
+            label="Dashboard" 
             to="/admin" 
             active={path === "/admin"} 
           />
