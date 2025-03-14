@@ -8,8 +8,6 @@ import {
   CreditCard, 
   Send, 
   Edit, 
-  LogIn, 
-  Settings,
   Unlock,
   Lock,
   TrendingUp,
@@ -32,20 +30,7 @@ import {
   AlertDescription
 } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogFooter, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogTrigger 
-} from "@/components/ui/dialog";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
 
-// Mantive apenas o mock data essencial para simplificar
 const mockUserDetail = {
   id: "1",
   name: "Carlos Silva",
@@ -89,14 +74,12 @@ const AdminUserDetail = () => {
   const [showEditUserDialog, setShowEditUserDialog] = useState(false);
   const [isFrozen, setIsFrozen] = useState(false);
   
-  // Simula busca de detalhes do usuário
   const user = mockUserDetail;
   
   const goBack = () => {
     navigate("/admin/users");
   };
   
-  // Formatar data para exibição
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('pt-BR', {
@@ -108,7 +91,6 @@ const AdminUserDetail = () => {
     }).format(date);
   };
 
-  // Formatar valores monetários
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',

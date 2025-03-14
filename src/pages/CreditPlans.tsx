@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
 
@@ -10,8 +10,6 @@ const CreditPlanCard = ({
   price, 
   bonus, 
   profit,
-  color = "bg-gray-200",
-  textColor = "text-black",
   bonusColor = "text-crypto-gain",
   isPopular = false,
   creditsBase = 15,
